@@ -1,5 +1,9 @@
 def solve():
-    a = list(map(int,input().split(" ")))
+    l = list(map(int,input().split(" ")))
+    l.sort()
+    if l[-1]+l[-2]>=10:
+        return("YES")
+    else: return("NO")
 
 def getIns():
     for _ in range(int(input())):
