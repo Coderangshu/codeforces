@@ -1,3 +1,5 @@
+# explanation : https://youtu.be/KW_pyUjgZrU
+
 def solve():
     n,k = list(map(int,input().split(" ")))
     a = list(map(int,input().split(" ")))

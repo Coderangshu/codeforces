@@ -1,12 +1,11 @@
 def solve():
-    pass
+    a = list(map(int,input().split(" ")))
 
 def getIns():
-    t = int(input())
-    while t > 0:
-        t -= 1
+    for _ in range(int(input())):
         print(solve())
 
+# getIns()
 
 from contextlib import redirect_stdout
 with open('out.txt', 'w') as f:
