@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Angshuman Sengupta - Portfolio</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            color: #333;
+            background-color: #f4f4f4;
+        }
+        .dark-theme {
+            background-color: #2e2e2e;
+            color: #f4f4f4;
+        }
+        pre {
+            background-color: #1e1e1e;
+            color: #dcdcdc;
+            padding: 10px;
+            border-radius: 8px;
+            overflow: auto;
+            font-family: monospace;
+        }
+        code {
+            display: block;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+        table, th, td {
+            border: 1px solid #ddd;
+        }
+        th, td {
+            padding: 10px;
+            text-align: left;
+        }
+        th {
+            background-color: #333;
+            color: #fff;
+        }
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+        a {
+            text-decoration: none;
+            color: black;
+        }
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background-color: #333;
+            color: #fff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 10px 0;
+            z-index: 1000; 
+        }
+        .nav-item:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+
+    <header style="background: #333; color: #fff; padding: 20px; text-align: center;">
+        <nav class="navbar">
+            <ul style="list-style: none; padding: 0; display: flex; justify-content: space-around; margin: 0;">
+                <li class="nav-item" style="margin: 0;">
+                    <a href="#about" style="color: #fff; text-decoration: none; padding: 10px 20px;">About</a>
+                </li>
+                <li class="nav-item" style="margin: 0;">
+                    <a href="#qualification" style="color: #fff; text-decoration: none; padding: 10px 20px;">Qualification</a>
+                </li>
+                <li class="nav-item" style="margin: 0;">
+                    <a href="#projects" style="color: #fff; text-decoration: none; padding: 10px 20px;">Projects</a>
+                </li>
+                <li class="nav-item" style="margin: 0;">
+                    <a href="#experience" style="color: #fff; text-decoration: none; padding: 10px 20px;">Experience</a>
+                </li>
+            </ul>
+        </nav>
+    </header>
+
+    <section id="about" style="padding: 20px; margin: 20px; background: #fff; border-radius: 8px; text-align: center;">
+        <div style="display: flex; align-items: flex-start; gap: 20px; flex-wrap: wrap; justify-content: center;">
+            <img src="portfolioPics/Me.jpg" alt="My Photo" style="width: 500px; height: 300px; border-radius: 15px;">
+            <div style="max-width: 600px; text-align: left;">
+                <h1 style="margin: 0; font-size: 55px;">Angshuman Sengupta</h1>
+                <p>I am a learner-developer who is passionate about stuffs like Augmented and Virtual reality, Image processing and graphics, deep learning and data science. My comfort lies in Python, PyTorch, TensorFlow and openCV. I am actively looking for opportunities in Artificial Intelligence and trying to indulge myself into the wonderful world of Open Source Community.
+
+                    <br>👨🏽‍💻 Currently working, learning and growing my skillset in deep learning, competitive coding, data structures and algorithms.
+                    <br>🤝 Open for collaborations in deep learning, analytics and data science.
+                    <br>🌱 I’m currently in the process of learning
+                    <br>💬 Ask me about Python, C, OOPS, Data Structures, CNNs, RNNs, opencv, DVC and GitHub workflows.
+                    <br>😄 Pronouns: He/his/him</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Qualification Section -->
+    <section id="qualification" style="padding: 20px; margin: 20px; background: #fff; border-radius: 8px;">
+        <h2>Qualification</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Qualification</th>
+                    <th>Institute Name</th>
+                    <th>Board/University</th>
+                    <th>CGPA/Percentage</th>
+                    <th>Completion Year</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Master of Technology</td>
+                    <td>IIT Bombay</td>
+                    <td>IIT Bombay</td>
+                    <td>T.B.D.</td>
+                    <td>2027</td>
+                </tr>
+                <tr>
+                    <td>Graduation</td>
+                    <td>IEM, Kolkata</td>
+                    <td>West Bengal University of Technology</td>
+                    <td>9.1</td>
+                    <td>2022</td>
+                </tr>
+                <tr>
+                    <td>Higher Secondary</td>
+                    <td>Burnpur Riverside School</td>
+                    <td>CBSE</td>
+                    <td>91.4%</td>
+                    <td>2017</td>
+                </tr>
+                <tr>
+                    <td>Secondary</td>
+                    <td>Burnpur Riverside School</td>
+                    <td>CBSE</td>
+                    <td>10</td>
+                    <td>2015</td>
+                </tr>
+            </tbody>
+        </table>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects" style="padding: 20px; margin: 20px; background: #fff; border-radius: 8px;">
+        <h2>Projects</h2>
+        <div style="display: flex; flex-wrap: wrap; gap: 20px;">
+            
+            <div style="flex: 1 1 calc(33.333% - 20px); box-sizing: border-box; background: #eee; border-radius: 8px; padding: 10px; text-align: center;">
+                <a href="https://blogpost-tan.vercel.app/trending"><img src="portfolioPics/blogpost.png" alt="BLOG HOSTING WEBSITE" style="max-width: 100%; height: auto; border-radius: 8px;">
+                <h3>BLOG HOSTING WEBSITE</h3>
+                <p>Dynamic website using CMS with PostgreSQL DB with NodeJS as backend.
+                    Frontend using React and NextJS with tailwindCSS. API using GraphQL.</p>
+                </a>
+            </div>
+            <div style="flex: 1 1 calc(33.333% - 20px); box-sizing: border-box; background: #eee; border-radius: 8px; padding: 10px; text-align: center;">
+                <a href="https://github.com/SWE-Lab/Smart_LMS"><img src="portfolioPics/lms.png" alt="SMART LIBRARY MANAGEMENT SYSTEM" style="max-width: 100%; height: auto; border-radius: 8px;">
+                <h3>SMART LIBRARY MANAGEMENT SYSTEM</h3>
+                <p>Frontend with AWK, backend using SOLID & object-oriented designs.</p>
+                </a>
+            </div>
+            <div style="flex: 1 1 calc(33.333% - 20px); box-sizing: border-box; background: #eee; border-radius: 8px; padding: 10px; text-align: center;">
+                <a href="https://coderangshu.github.io/"><img src="portfolioPics/graphologer.png" alt="GRAPHOLOGER" style="max-width: 100%; height: auto; border-radius: 8px;">
+                <h3>GRAPHOLOGER</h3>
+                <p>Implemented basic Deep Learning algorithms with 88% accuracy - Hand
+                    gesture detection in a Rock, Paper, Scissors, Spock, Handwritten number &
+                    costume classification.</p>
+                </a>
+            </div>
+            
+        </div>
+    </section>
+
+    <!-- New Experience Section -->
+    <section id="experience" style="padding: 20px; margin: 20px; background: #fff; border-radius: 8px;">
+        <h2>Experience</h2>
+        <!-- Example of experience entries -->
+        <ul>
+            <li><strong>TATA RESEARCH</strong> - Software Developer : Engineered a testing tool with junit to validate Natural Language Processmodel (Aug, 2022 - July, 2024)</li>
+        </ul>
+    </section>
+
+    <section style="padding: 20px; margin: 20px; background: #fff; border-radius: 8px; text-align: center;">
+        <h2>Take a short trip to our magnificient campus!!!</h2>
+        <iframe width="560" height="315" src="https://www.youtube.com/embed/e_psymJhjHg?controls=0" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen style="border-radius: 8px;"></iframe>
+    </section>
+
+    <section style="padding: 20px; margin: 20px; background: #000; border-radius: 8px; text-align: left;" class="dark-theme">
+        <h2>Say Hi to Mother Earth with This Snippet</h2>
+        <pre>
+<code>
+#include &lt;iostream&gt;
+using namespace std;
+
+int main() {
+    cout &lt;&lt; "Hello, World!" &lt;&lt; endl;
+    return 0;
+}
+</code>
+        </pre>
+    </section>
+
+    <footer style="text-align: center; padding: 10px; background: #333; color: #fff;">
+        <p>&copy; 2024 Angshuman Sengupta. All rights reserved.</p>
+    </footer>
+
+</body>
+</html>
