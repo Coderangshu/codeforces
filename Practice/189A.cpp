@@ -33,8 +33,25 @@ string getStr() {
     return strIp;
 }
 
+vi v;
+unm<int,int> um;
+
+int recursion(int lengthLeft) {
+    if(lengthLeft==0) return 0;
+    if(um.count(lengthLeft)>0) return um[lengthLeft];
+    int ans = INT_MIN;
+    forA(v) if(lengthLeft>=i) ans = max(ans,recursion(lengthLeft-i)+1);
+    return um[lengthLeft] = ans;
+}
+
+
 auto solve() {
-    return 0;
+    int n,a,b,c; cin>>n>>a>>b>>c;
+    um.clear();
+    v = {a,b,c};
+    // forA(v) cout<<i<<" ";
+    // cout<<endl;
+    return recursion(n);
 }
 
 int32_t main() {

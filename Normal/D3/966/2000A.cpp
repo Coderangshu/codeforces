@@ -34,12 +34,22 @@ string getStr() {
 }
 
 auto solve() {
-    return 0;
+    string s; cin>>s;
+    if(s.length()==2) return "NO";
+    if(s.substr(0,2)=="10") {
+        if(s.length()>=3 and s.substr(0,3)=="100") return "NO";
+        string sa = s.substr(2);
+        int n = stoi(sa);
+        if(n>=2) return "YES";
+        return "NO";
+    } else {
+        return "NO";
+    }
 }
 
 int32_t main() {
     ios::sync_with_stdio(false); cin.tie(0); cout.tie(0);
-    // int t; cin>>t;
-    // while(t--)
+    int t; cin>>t;
+    while(t--)
         cout<<solve()<<endl;
 }

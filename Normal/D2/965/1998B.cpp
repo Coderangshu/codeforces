@@ -1,7 +1,6 @@
 #include<bits/stdc++.h>
 using namespace std;
 
-#define int ll
 #define x first
 #define y second
 #define mp make_pair
@@ -9,20 +8,17 @@ using namespace std;
 #define sqr(a) ((a) * (a))
 #define sz(a) int(a.size())
 #define all(a) a.begin(), a.end()
-#define forn(n) for(int i = 0; i < int(n); i++)
-#define forR(n) for(int i = n-1; i > -1; i--)
+#define forn(n) for(int i = 0; i < int(n); i++) 
 #define fore(l, r) for(int i = int(l); i < int(r); i++)
 #define forA(arr) for(auto i:arr)
 #define unm unordered_map
-#define uns unordered_set
 
-using ll = long long;
+typedef long long li;
 typedef long double ld;
-using pii = pair<int, int>;
-typedef vector<long long> vi;
+typedef pair<int, int> pt;
 
-vector<int> getInts(int n) {
-    vi arr(n);
+vector<li> getInts(li n) {
+    vector<li> arr(n);
     forn(n) cin>>arr[i];
     return arr;
 }
@@ -33,13 +29,23 @@ string getStr() {
     return strIp;
 }
 
-auto solve() {
-    return 0;
+void solve() {
+    li n, a;
+    cin>>n;
+    vector<int> v(n);
+    forn(n) cin>>v[i];
+    fore(1,n) cout<<v[i]<<" ";
+    cout<<v[0]<<endl;
 }
 
-int32_t main() {
-    ios::sync_with_stdio(false); cin.tie(0); cout.tie(0);
-    // int t; cin>>t;
-    // while(t--)
-        cout<<solve()<<endl;
+int main() {
+    ios::sync_with_stdio(false);
+	cin.tie(nullptr);
+    
+    li t;
+    cin>>t;
+    while(t--) {
+        solve();
+    }
+    return 0;
 }

@@ -1,7 +1,6 @@
 #include<bits/stdc++.h>
 using namespace std;
 
-#define int ll
 #define x first
 #define y second
 #define mp make_pair
@@ -14,15 +13,13 @@ using namespace std;
 #define fore(l, r) for(int i = int(l); i < int(r); i++)
 #define forA(arr) for(auto i:arr)
 #define unm unordered_map
-#define uns unordered_set
 
-using ll = long long;
+typedef long long li;
 typedef long double ld;
-using pii = pair<int, int>;
-typedef vector<long long> vi;
+typedef pair<long long, long long> pi;
 
-vector<int> getInts(int n) {
-    vi arr(n);
+vector<li> getInts(li n) {
+    vector<li> arr(n);
     forn(n) cin>>arr[i];
     return arr;
 }
@@ -37,9 +34,13 @@ auto solve() {
     return 0;
 }
 
-int32_t main() {
-    ios::sync_with_stdio(false); cin.tie(0); cout.tie(0);
-    // int t; cin>>t;
+int main() {
+    ios::sync_with_stdio(false);
+	cin.tie(nullptr);
+    
+    // li t;
+    // cin>>t;
     // while(t--)
         cout<<solve()<<endl;
+    return 0;
 }

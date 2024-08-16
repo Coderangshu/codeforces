@@ -29,41 +29,31 @@ string getStr() {
     return strIp;
 }
 
-void getNoOfDivisors(li num, vector<li> &v) {
-    if (v[num]!=0) return;
-    if(num==1) {
-        v[num]=1;
-        return;
-    }
-    li ans = 0;
-    for(li i=2;i<int(sqrt(num))+1;i++) {
-        if(num%i==0) {
-            if(i*i==num) ans++;
-            else ans += 2;
-        }
-    }
-    v[num] = ans+2;
-}
-
 auto solve() {
-    li a,b,c,ans = 0, mod = 2e30;
-    cin>>a>>b>>c;
-    vector<li> v(a*b*c+1);
-    for(li i=1;i<=a;i++) {
-        for(li j=1;j<=b;j++) {
-            for(li k=1;k<=c;k++) {
-                li num = i*j*k;
-                getNoOfDivisors(num,v);
-                ans += v[num];
-                // cout<<num<<" "<<v[num]<<" "<<ans<<endl;
-            }
+    li n, n2, ans = 0;
+    cin>>n;
+    // cout<<n<<endl;
+    n2 = n*n;
+    // cout<<n2<<endl;
+    for(li i=1;i<=n;i++) {
+        li i2 = i*i;
+        for(li j=i+1;j<=n;j++) {
+            li j2 = j*j;
+            li k2 = i2+j2;
+            // cout<<"lsdkfjdslkjf "<<i2<<" "<<j2<<" "<<k2<<endl;
+            if(k2<=n2) {
+                ld sk2 = sqrt(k2);
+                // cout<<sk2<<" "<<int(sk2)<<endl;
+                if(sk2==int(sk2)) ans++;
+                // cout<<i2<<" "<<j2<<" "<<ans<<endl;
+            } else break;
         }
     }
-    return ans%mod;
+    return ans;
 }
 
 int main() {
-    // li t;
+    // int t;
     // cin>>t;
     // while(t--)
         cout<<solve()<<endl;

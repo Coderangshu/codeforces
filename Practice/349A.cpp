@@ -29,37 +29,28 @@ string getStr() {
     return strIp;
 }
 
-void getNoOfDivisors(li num, vector<li> &v) {
-    if (v[num]!=0) return;
-    if(num==1) {
-        v[num]=1;
-        return;
-    }
-    li ans = 0;
-    for(li i=2;i<int(sqrt(num))+1;i++) {
-        if(num%i==0) {
-            if(i*i==num) ans++;
-            else ans += 2;
-        }
-    }
-    v[num] = ans+2;
-}
-
 auto solve() {
-    li a,b,c,ans = 0, mod = 2e30;
-    cin>>a>>b>>c;
-    vector<li> v(a*b*c+1);
-    for(li i=1;i<=a;i++) {
-        for(li j=1;j<=b;j++) {
-            for(li k=1;k<=c;k++) {
-                li num = i*j*k;
-                getNoOfDivisors(num,v);
-                ans += v[num];
-                // cout<<num<<" "<<v[num]<<" "<<ans<<endl;
-            }
+    li n;
+    cin>>n;
+    unordered_map<int,int> um;
+    while(n--) {
+        li a;
+        cin>>a;
+        if(a==25) um[25]++;
+        else if(a==50) {
+            um[50]++;
+            if(um[25]>0) um[25]--;
+            else return "NO";
+        } else {
+            um[100]++;
+            if(um[50]>0 and um[25]>0) {
+                um[50]--;
+                um[25]--;
+            } else if(um[25]>=3) um[25] -= 3;
+            else return "NO";
         }
     }
-    return ans%mod;
+    return "YES";
 }
 
 int main() {

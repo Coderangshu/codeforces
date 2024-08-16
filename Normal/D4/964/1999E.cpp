@@ -29,43 +29,35 @@ string getStr() {
     return strIp;
 }
 
-void getNoOfDivisors(li num, vector<li> &v) {
-    if (v[num]!=0) return;
-    if(num==1) {
-        v[num]=1;
-        return;
-    }
+vector<int> prefixSum;
+
+li getCount(li n) {
     li ans = 0;
-    for(li i=2;i<int(sqrt(num))+1;i++) {
-        if(num%i==0) {
-            if(i*i==num) ans++;
-            else ans += 2;
-        }
+    while(n) {
+        n /= 3;
+        ans++;
     }
-    v[num] = ans+2;
+    return ans;
 }
 
 auto solve() {
-    li a,b,c,ans = 0, mod = 2e30;
-    cin>>a>>b>>c;
-    vector<li> v(a*b*c+1);
-    for(li i=1;i<=a;i++) {
-        for(li j=1;j<=b;j++) {
-            for(li k=1;k<=c;k++) {
-                li num = i*j*k;
-                getNoOfDivisors(num,v);
-                ans += v[num];
-                // cout<<num<<" "<<v[num]<<" "<<ans<<endl;
-            }
-        }
-    }
-    return ans%mod;
+    li l,r;
+    cin>>l>>r;
+    return prefixSum[r]-prefixSum[l-1]+prefixSum[l]-prefixSum[l-1];
 }
 
 int main() {
-    // li t;
-    // cin>>t;
-    // while(t--)
+    ios::sync_with_stdio(false);
+	cin.tie(nullptr);
+
+    prefixSum.assign(2e5+10,0);
+    for(int i=1;i<=2e5+1;i++) {
+        prefixSum[i] = getCount(i)+prefixSum[i-1];
+    }
+
+    li t;
+    cin>>t;
+    while(t--)
         cout<<solve()<<endl;
     return 0;
 }

@@ -34,12 +34,40 @@ string getStr() {
 }
 
 auto solve() {
-    return 0;
+    int n;cin>>n;
+    vi a(n);
+    vector<char> v(n);
+    forn(n) cin>>a[i];
+    forn(n) cin>>v[i];
+
+    vi prefix(n+1);
+    int sum = 0;
+    forn(n) {
+        sum += a[i];
+        // cout<<a[i]<<" "<<sum<<endl;
+        prefix[i+1] = sum;
+    }
+    // forA(prefix) cout<<i<<" ";
+    // cout<<endl;
+
+    int l = 1, r = n;
+    int ans = 0;
+    while(l<r) {
+        if(v[l-1]=='L' and v[r-1]=='R'){
+            ans += prefix[r]-prefix[l-1];
+            l++;
+            r--;
+        }
+        if(v[l-1]=='R') l++;
+        if(v[r-1]=='L') r--;
+    }
+
+    return ans;
 }
 
 int32_t main() {
     ios::sync_with_stdio(false); cin.tie(0); cout.tie(0);
-    // int t; cin>>t;
-    // while(t--)
+    int t; cin>>t;
+    while(t--)
         cout<<solve()<<endl;
 }

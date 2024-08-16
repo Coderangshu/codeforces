@@ -34,12 +34,18 @@ string getStr() {
 }
 
 auto solve() {
+    int n,m,k;
+    cin>>n>>m>>k;
+    int w; cin>>w;
+    vi a(w);
+    forn(w) cin>>a[i];
+
     return 0;
 }
 
 int32_t main() {
     ios::sync_with_stdio(false); cin.tie(0); cout.tie(0);
-    // int t; cin>>t;
-    // while(t--)
+    int t; cin>>t;
+    while(t--)
         cout<<solve()<<endl;
 }
