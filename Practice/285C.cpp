@@ -9,14 +9,12 @@ using namespace std;
 #define sqr(a) ((a) * (a))
 #define sz(a) int(a.size())
 #define all(a) a.begin(), a.end()
-#define forl(i,n) for(int i = 0; i < int(n); i++)
-#define forr(i,n) for(int i = n-1; i > -1; i--)
-#define fore(l, r) for(int i = int(l); i <= int(r); i++)
-#define fora(v,arr) for(auto v:arr)
+#define forn(n) for(int i = 0; i < int(n); i++)
+#define forR(n) for(int i = n-1; i > -1; i--)
+#define fore(l, r) for(int i = int(l); i < int(r); i++)
+#define forA(arr) for(auto i:arr)
 #define unm unordered_map
 #define uns unordered_set
-#define INT_MAX LLONG_MAX
-#define INT_MIN LLONG_MIN
 
 using ll = long long;
 typedef long double ld;
@@ -25,7 +23,7 @@ typedef vector<long long> vi;
 
 vector<int> getInts(int n) {
     vi arr(n);
-    forl(i,n) cin>>arr[i];
+    forn(n) cin>>arr[i];
     return arr;
 }
 
@@ -36,17 +34,20 @@ string getStr() {
 }
 
 auto solve() {
-    return 0;
+    int n;cin>>n;
+    vi v(n);
+    forn(n) cin>>v[i];
+    sort(all(v));
+    int ans = 0;
+    fore(1,n+1) {
+        ans += abs(v[i-1]-i);
+    }
+    return ans;
 }
 
 int32_t main() {
-    ios::sync_with_stdio(0); cin.tie(0); cout.tie(0);
-    int t = 1;
-    // cin>>t;
-    while(t--) {
+    ios::sync_with_stdio(false); cin.tie(0); cout.tie(0);
+    // int t; cin>>t;
+    // while(t--)
         cout<<solve()<<endl;
-        // solve();
-    }
-    cerr << "time taken : " << (float)clock() / CLOCKS_PER_SEC << " secs" << "\n";
 }
-

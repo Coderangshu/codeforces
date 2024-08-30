@@ -36,16 +36,30 @@ string getStr() {
 }
 
 auto solve() {
-    return 0;
+    char s[101];
+    cin.getline(s, 100, '\n');
+    cout<<s<<endl;
+    char *token = strtok(s," ");
+    vector<string> vs;
+    while(token) {
+        vs.pb(token);
+        token = strtok(NULL, " ");
+    }
+    // string f = vs[0], l = vs[sz(vs)-1];
+    // cout<<f<<" "<<l<<endl;
+    // if((f!="lala" and l!="miao") or (f=="lala" and l=="miao")) return "OMG>.< I don't know!\n";
+    // else if(f=="lala") return "Freda's\n";
+    // else return "Rainbow's\n";
 }
 
 int32_t main() {
     ios::sync_with_stdio(0); cin.tie(0); cout.tie(0);
     int t = 1;
-    // cin>>t;
+    cin>>t;
+    cout<<t<<endl;
     while(t--) {
-        cout<<solve()<<endl;
-        // solve();
+        // cout<<solve()<<endl;
+        solve();
     }
     cerr << "time taken : " << (float)clock() / CLOCKS_PER_SEC << " secs" << "\n";
 }

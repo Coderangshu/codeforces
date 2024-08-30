@@ -9,14 +9,12 @@ using namespace std;
 #define sqr(a) ((a) * (a))
 #define sz(a) int(a.size())
 #define all(a) a.begin(), a.end()
-#define forl(i,n) for(int i = 0; i < int(n); i++)
-#define forr(i,n) for(int i = n-1; i > -1; i--)
-#define fore(l, r) for(int i = int(l); i <= int(r); i++)
-#define fora(v,arr) for(auto v:arr)
+#define forn(n) for(int i = 0; i < int(n); i++)
+#define forR(n) for(int i = n-1; i > -1; i--)
+#define fore(l, r) for(int i = int(l); i < int(r); i++)
+#define forA(arr) for(auto i:arr)
 #define unm unordered_map
 #define uns unordered_set
-#define INT_MAX LLONG_MAX
-#define INT_MIN LLONG_MIN
 
 using ll = long long;
 typedef long double ld;
@@ -25,7 +23,7 @@ typedef vector<long long> vi;
 
 vector<int> getInts(int n) {
     vi arr(n);
-    forl(i,n) cin>>arr[i];
+    forn(n) cin>>arr[i];
     return arr;
 }
 
@@ -36,17 +34,32 @@ string getStr() {
 }
 
 auto solve() {
-    return 0;
+    int n;cin>>n;
+    vi v(n);
+    int count1 = 0;
+    forn(n) {
+        int a;cin>>a;
+        if(a==1) {
+            v[i] = -1;
+            count1++;
+        } else {
+            v[i] = 1;
+        }
+    }
+    if(count1==n) return n-1;
+    if(count1==0) return n;
+    int l = 0, r = 0, maxHere = v[0], maxSoFar = v[0];
+    fore(1,n) {
+        maxHere = max(v[i],maxHere+v[i]);
+        maxSoFar = max(maxSoFar,maxHere);
+    }
+    return maxSoFar+count1;
 }
 
 int32_t main() {
     ios::sync_with_stdio(0); cin.tie(0); cout.tie(0);
-    int t = 1;
-    // cin>>t;
-    while(t--) {
+    // int t; cin>>t;
+    // while(t--)
         cout<<solve()<<endl;
-        // solve();
-    }
     cerr << "time taken : " << (float)clock() / CLOCKS_PER_SEC << " secs" << "\n";
 }
-

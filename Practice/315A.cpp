@@ -9,14 +9,12 @@ using namespace std;
 #define sqr(a) ((a) * (a))
 #define sz(a) int(a.size())
 #define all(a) a.begin(), a.end()
-#define forl(i,n) for(int i = 0; i < int(n); i++)
-#define forr(i,n) for(int i = n-1; i > -1; i--)
-#define fore(l, r) for(int i = int(l); i <= int(r); i++)
-#define fora(v,arr) for(auto v:arr)
+#define forn(n) for(int i = 0; i < int(n); i++)
+#define forR(n) for(int i = n-1; i > -1; i--)
+#define fore(l, r) for(int i = int(l); i < int(r); i++)
+#define forA(arr) for(auto i:arr)
 #define unm unordered_map
 #define uns unordered_set
-#define INT_MAX LLONG_MAX
-#define INT_MIN LLONG_MIN
 
 using ll = long long;
 typedef long double ld;
@@ -25,7 +23,7 @@ typedef vector<long long> vi;
 
 vector<int> getInts(int n) {
     vi arr(n);
-    forl(i,n) cin>>arr[i];
+    forn(n) cin>>arr[i];
     return arr;
 }
 
@@ -36,7 +34,24 @@ string getStr() {
 }
 
 auto solve() {
-    return 0;
+    int n;cin>>n;
+    vector<vi> v;
+    forn(n) {
+        int a,b;cin>>a>>b;
+        v.pb({a,b});
+    }
+    int ans = 0;
+    forn(n) {
+        int toBeOpened = v[i][0];
+        int j = 0;
+        for(;j<n;j++) {
+            if(j!=i) {
+                if(v[j][1]==toBeOpened) break;
+            }
+        }
+        if(j==n) ans++;
+    }
+    return ans;
 }
 
 int32_t main() {
@@ -47,6 +62,5 @@ int32_t main() {
         cout<<solve()<<endl;
         // solve();
     }
-    cerr << "time taken : " << (float)clock() / CLOCKS_PER_SEC << " secs" << "\n";
+    // cerr << "time taken : " << (float)clock() / CLOCKS_PER_SEC << " secs" << "\n";
 }
-

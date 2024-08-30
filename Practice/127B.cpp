@@ -11,12 +11,10 @@ using namespace std;
 #define all(a) a.begin(), a.end()
 #define forl(i,n) for(int i = 0; i < int(n); i++)
 #define forr(i,n) for(int i = n-1; i > -1; i--)
-#define fore(l, r) for(int i = int(l); i <= int(r); i++)
+#define fore(l, r) for(int i = int(l); i < int(r); i++)
 #define fora(v,arr) for(auto v:arr)
 #define unm unordered_map
 #define uns unordered_set
-#define INT_MAX LLONG_MAX
-#define INT_MIN LLONG_MIN
 
 using ll = long long;
 typedef long double ld;
@@ -36,7 +34,17 @@ string getStr() {
 }
 
 auto solve() {
-    return 0;
+    int n;cin>>n;
+    vi count(101,0);
+    forl(i,n) {
+        int e;cin>>e;
+        count[e]++;
+    }
+    int ans = 0;
+    fora(i,count) {
+        ans += i/2;
+    }
+    return ans/2;
 }
 
 int32_t main() {

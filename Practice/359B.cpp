@@ -11,12 +11,10 @@ using namespace std;
 #define all(a) a.begin(), a.end()
 #define forl(i,n) for(int i = 0; i < int(n); i++)
 #define forr(i,n) for(int i = n-1; i > -1; i--)
-#define fore(l, r) for(int i = int(l); i <= int(r); i++)
+#define fore(l, r) for(int i = int(l); i < int(r); i++)
 #define fora(v,arr) for(auto v:arr)
 #define unm unordered_map
 #define uns unordered_set
-#define INT_MAX LLONG_MAX
-#define INT_MIN LLONG_MIN
 
 using ll = long long;
 typedef long double ld;
@@ -36,6 +34,17 @@ string getStr() {
 }
 
 auto solve() {
+    int n,k;cin>>n>>k;
+    forl(i,n) {
+        if(i>0) cout<<" ";
+        if(k>0) {
+            cout<<2*i+2<<" "<<2*i+1;
+        } else {
+            cout<<2*i+1<<" "<<2*i+2;
+        }
+        k--;
+    }
+    cout<<endl;
     return 0;
 }
 
@@ -44,9 +53,8 @@ int32_t main() {
     int t = 1;
     // cin>>t;
     while(t--) {
-        cout<<solve()<<endl;
-        // solve();
+        // cout<<solve()<<endl;
+        solve();
     }
     cerr << "time taken : " << (float)clock() / CLOCKS_PER_SEC << " secs" << "\n";
 }
-

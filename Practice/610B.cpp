@@ -36,7 +36,29 @@ string getStr() {
 }
 
 auto solve() {
-    return 0;
+    int n; cin>>n;
+    vi a(n);
+    int mn = INT_MAX;
+    forl(i,n) {
+        cin>>a[i];
+        mn = min(mn,a[i]);
+    }
+    // cout<<mn<<endl;
+    vi mni;
+    forl(i,n) if(a[i]==mn) mni.pb(i);
+    // cout<<"MNI ";
+    // fora(i,mni) cout<<i<<" ";
+    cout<<endl;
+
+    int ans = mn*n;
+    // cout<<ans<<endl;
+    int mx = INT_MIN;
+    fore(0,sz(mni)-2) {
+        mx = max(mx,mni[i+1]-mni[i]-1);
+    }
+    mx = max(mx,n-mni.back() + mni.front()-1);
+    // cout<<mx<<endl;
+    return ans+mx;
 }
 
 int32_t main() {
@@ -47,6 +69,6 @@ int32_t main() {
         cout<<solve()<<endl;
         // solve();
     }
-    cerr << "time taken : " << (float)clock() / CLOCKS_PER_SEC << " secs" << "\n";
+    // cerr << "time taken : " << (float)clock() / CLOCKS_PER_SEC << " secs" << "\n";
 }
 

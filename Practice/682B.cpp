@@ -9,14 +9,13 @@ using namespace std;
 #define sqr(a) ((a) * (a))
 #define sz(a) int(a.size())
 #define all(a) a.begin(), a.end()
-#define forl(i,n) for(int i = 0; i < int(n); i++)
-#define forr(i,n) for(int i = n-1; i > -1; i--)
-#define fore(l, r) for(int i = int(l); i <= int(r); i++)
-#define fora(v,arr) for(auto v:arr)
+#define fori(n) for(int i = 0; i < int(n); i++)
+#define forj(n) for(int j = 0; j < int(n); j++)
+#define forR(n) for(int i = n-1; i > -1; i--)
+#define fore(l, r) for(int i = int(l); i < int(r); i++)
+#define forA(arr) for(auto i:arr)
 #define unm unordered_map
 #define uns unordered_set
-#define INT_MAX LLONG_MAX
-#define INT_MIN LLONG_MIN
 
 using ll = long long;
 typedef long double ld;
@@ -25,7 +24,7 @@ typedef vector<long long> vi;
 
 vector<int> getInts(int n) {
     vi arr(n);
-    forl(i,n) cin>>arr[i];
+    fori(n) cin>>arr[i];
     return arr;
 }
 
@@ -36,7 +35,17 @@ string getStr() {
 }
 
 auto solve() {
-    return 0;
+    int n;cin>>n;
+    vi a(n);
+    fori(n) cin>>a[i];
+    sort(all(a));
+    int mex = 1;
+    forA(a) {
+        if(i>=mex) {
+            mex++;
+        }
+    }
+    return mex;
 }
 
 int32_t main() {
@@ -49,4 +58,3 @@ int32_t main() {
     }
     cerr << "time taken : " << (float)clock() / CLOCKS_PER_SEC << " secs" << "\n";
 }
-

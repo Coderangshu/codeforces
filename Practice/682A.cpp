@@ -15,8 +15,6 @@ using namespace std;
 #define fora(v,arr) for(auto v:arr)
 #define unm unordered_map
 #define uns unordered_set
-#define INT_MAX LLONG_MAX
-#define INT_MIN LLONG_MIN
 
 using ll = long long;
 typedef long double ld;
@@ -36,7 +34,16 @@ string getStr() {
 }
 
 auto solve() {
-    return 0;
+    int n,m;cin>>n>>m;
+    unm<int,int> um;
+    fore(1,m) um[i%5]++;
+    um[5] = um[0];
+    int ans = 0;
+    fore(1,n) {
+        // cout<<i<<" "<<um[5-i%5]<<endl;
+        ans += um[5-i%5];
+    }
+    return ans;
 }
 
 int32_t main() {
