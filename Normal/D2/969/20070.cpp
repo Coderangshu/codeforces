@@ -23,54 +23,34 @@ typedef long double ld;
 using pii = pair<int, int>;
 typedef vector<long long> vi;
 
-// GET INTEGER ARRAY AS INPUT OF SIZE N
-vi getInts(int n) {
+vector<int> getInts(int n) {
     vi arr(n);
     forl(i,n) cin>>arr[i];
     return arr;
 }
 
-// UNION FIND CLASS
-class UnionFind {
-    vi parent, size;
-    public:
-    UnionFind(int n) {
-        this->parent.resize(n);
-        this->size.assign(n,1);
-        forl(i,n) parent[i] = i;
-    }
-
-    void Union(int a, int b) {
-        int pa = this->findParent(a), pb = this->findParent(b);
-        if(this->size[pa]>=this->size[pb]) {
-            this->parent[pb] = pa;
-            this->size[pa]++;
-        } else {
-            this->parent[pa] = pb;
-            this->size[pb]++;
-        }
-    }
-
-    int findParent(int a) {
-        if(this->parent[a]==a) return a;
-        return parent[a] = this->findParent(parent[a]);
-    }
-
-    vi getParentArr() {return this->parent;}
-};
+string getStr() {
+    string strIp;
+    getline(cin,strIp);
+    return strIp;
+}
 
 auto solve() {
-    return 0;
+    int l,r;cin>>l>>r;
+    if((r-l+1)<=2) return 0ll;
+    if(l%2==0) return int((r-l+1)/4);
+    return int(1+(r-l-2)/4);
 }
 
 int32_t main() {
     ios::sync_with_stdio(0); cin.tie(0); cout.tie(0);
     int t = 1;
-    // cin>>t;cin.clear()
+    cin>>t;
+    cout<<endl;
     while(t--) {
         cout<<solve()<<endl;
         // solve();
     }
-    cerr << "time taken : " << (float)clock() / CLOCKS_PER_SEC << " secs" << "\n";
+    // cerr << "time taken : " << (float)clock() / CLOCKS_PER_SEC << " secs" << "\n";
 }
 

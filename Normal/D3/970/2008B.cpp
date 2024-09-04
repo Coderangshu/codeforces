@@ -30,6 +30,13 @@ vi getInts(int n) {
     return arr;
 }
 
+// GET A STRING WITH SPACE AS A SINGLE STRING IN INPUT
+string getStr() {
+    string strIp;
+    getline(cin,strIp);
+    return strIp;
+}
+
 // UNION FIND CLASS
 class UnionFind {
     vi parent, size;
@@ -59,14 +66,61 @@ class UnionFind {
     vi getParentArr() {return this->parent;}
 };
 
+bool isPerfectSquare(long long x)
+{
+    // Find floating point value of
+    // square root of x.
+    if (x >= 0) {
+
+        long long sr = sqrt(x);
+        
+        // if product of square root 
+        //is equal, then
+        // return T/F
+        return (sr * sr == x);
+    }
+    // else return false if n<0
+    return false;
+}
+
 auto solve() {
-    return 0;
+    int n;cin>>n;
+    string s;cin>>s;
+    if(!isPerfectSquare(n)) return "No";
+    int sr = sqrt(n);
+    // cout<<"sr "<<sr<<endl;
+    forl(i,sr) {
+        // cout<<i<<" "<<s[i]<<endl;
+        if(s[i]!='1') return "No";
+    }
+    int i = n-1;
+    int ts = sr;
+    while(ts--) if(s[i--]!='1') return "No";
+    s = s.substr(sr,n-2*sr);
+    if(s.length()>0) {
+    // cout<<s<<endl;
+        ts = sr-2;
+        int j = 0;
+        while(ts--) {
+            i = 0;
+            int tss = sr;
+            while(tss--) {
+                // cout<<i<<" "<<j<<" "<<s[i+j]<<endl;
+                if((i==0 or i%sr==sr-1)) {
+                    if(s[i+j]!='1') return "No";
+                } else if (s[i+j]!='0') return "No";
+                i++;
+            }
+            j += sr;
+        }
+    }
+    return "Yes";
 }
 
 int32_t main() {
     ios::sync_with_stdio(0); cin.tie(0); cout.tie(0);
     int t = 1;
-    // cin>>t;cin.clear()
+    cin>>t;
     while(t--) {
         cout<<solve()<<endl;
         // solve();

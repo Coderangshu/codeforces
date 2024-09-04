@@ -23,50 +23,47 @@ typedef long double ld;
 using pii = pair<int, int>;
 typedef vector<long long> vi;
 
-// GET INTEGER ARRAY AS INPUT OF SIZE N
-vi getInts(int n) {
+vector<int> getInts(int n) {
     vi arr(n);
     forl(i,n) cin>>arr[i];
     return arr;
 }
 
-// UNION FIND CLASS
-class UnionFind {
-    vi parent, size;
-    public:
-    UnionFind(int n) {
-        this->parent.resize(n);
-        this->size.assign(n,1);
-        forl(i,n) parent[i] = i;
-    }
-
-    void Union(int a, int b) {
-        int pa = this->findParent(a), pb = this->findParent(b);
-        if(this->size[pa]>=this->size[pb]) {
-            this->parent[pb] = pa;
-            this->size[pa]++;
-        } else {
-            this->parent[pa] = pb;
-            this->size[pb]++;
-        }
-    }
-
-    int findParent(int a) {
-        if(this->parent[a]==a) return a;
-        return parent[a] = this->findParent(parent[a]);
-    }
-
-    vi getParentArr() {return this->parent;}
-};
+string getStr() {
+    string strIp;
+    getline(cin,strIp);
+    return strIp;
+}
 
 auto solve() {
-    return 0;
+    int n,a,b;cin>>n>>a>>b;
+    int gcd = __gcd(a,b);
+    // cout<<"GCD "<<gcd<<endl;
+    // int *g = (int *)calloc(gcd*2, sizeof(int));
+    set<int> us;
+    forl(i,n) {
+        int ci;cin>>ci;
+        us.insert(ci%gcd);
+    }
+    vi g(all(us));
+    g.pb(g.front()+gcd);
+    int sg = sz(g);
+    // fora(i,g) cout<<i<<" ";
+    // cout<<endl;
+    int i = 0, j = 0;
+    int ans = INT_MAX;
+    while(i<sg-1) {
+        j = i+1;
+        ans = min(ans,gcd-(g[j]-g[i]));
+        i++;
+    }
+    return ans;
 }
 
 int32_t main() {
     ios::sync_with_stdio(0); cin.tie(0); cout.tie(0);
     int t = 1;
-    // cin>>t;cin.clear()
+    cin>>t;
     while(t--) {
         cout<<solve()<<endl;
         // solve();

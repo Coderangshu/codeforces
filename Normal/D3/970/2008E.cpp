@@ -30,6 +30,13 @@ vi getInts(int n) {
     return arr;
 }
 
+// GET A STRING WITH SPACE AS A SINGLE STRING IN INPUT
+string getStr() {
+    string strIp;
+    getline(cin,strIp);
+    return strIp;
+}
+
 // UNION FIND CLASS
 class UnionFind {
     vi parent, size;
@@ -59,18 +66,75 @@ class UnionFind {
     vi getParentArr() {return this->parent;}
 };
 
+bool compare (pair<char,int> p1, pair<char,int> p2) { 
+    if(p1.y==p2.y) return p1.y > p2.y; 
+    else return p1.x<p1.y;
+} 
+
 auto solve() {
-    return 0;
+    int n;cin>>n;
+    string s;cin>>s;
+    if(n==1) return 1ll;
+    vector<char> o,e;
+    unm<char,int> op,ep;
+    vector<pair<char,int>> ov,ev;
+    int maxo = INT_MIN, maxe = INT_MIN;
+    ep.clear();
+    op.clear();
+    forl(i,n) {
+        if(i%2==0) {
+            e.pb(s[i]);
+            ep[s[i]]++;
+            maxe = max(maxe,ep[s[i]]);
+        } else {
+            o.pb(s[i]);
+            op[s[i]]++;
+            maxo = max(maxo,ep[s[i]]);
+        }
+    }
+    int se = sz(ep), so = sz(op);
+    fora(i,op) cout<<i.x<<" "<<i.y<<"; ";
+    cout<<endl;
+    fora(i,ep) cout<<i.x<<" "<<i.y<<"; ";
+    cout<<endl;
+    cout<<se<<" "<<so<<endl;
+    if(se==1 and so==1) return 0ll;
+    int ans = 0;
+    if(n%2!=0) {
+        ans = 1;
+        if(se%2!=0) se--;
+        else so--;
+    }
+    maxo = (maxo==INT_MIN)?0:maxo;
+    maxe = (maxe==INT_MIN)?0:maxe;
+    // cout<<maxo<<" "<<maxe<<"  dlksjfsdlkf"<<endl;
+    ans += se-maxe+so-maxo;
+    return ans;
+    // copy(all(op), back_inserter(ov)); 
+    // copy(all(ep), back_inserter(ev));
+    // sort(all(ov), compare);
+    // sort(all(ev), compare);
+    
+    // cout<<"ODD"<<endl;
+    // fora(i,o) cout<<i<<" ";
+    // cout<<endl;
+    // cout<<"EVEN"<<endl;
+    // fora(i,e) cout<<i<<" ";
+    // cout<<endl;
+    // int on = sz(o), en = sz(e);
+    // if((on%2)^(en%2)) {
+
+    // }
+    // return 0;
 }
 
 int32_t main() {
     ios::sync_with_stdio(0); cin.tie(0); cout.tie(0);
     int t = 1;
-    // cin>>t;cin.clear()
+    cin>>t;
     while(t--) {
         cout<<solve()<<endl;
         // solve();
     }
     cerr << "time taken : " << (float)clock() / CLOCKS_PER_SEC << " secs" << "\n";
 }
-

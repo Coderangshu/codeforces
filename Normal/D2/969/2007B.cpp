@@ -36,27 +36,28 @@ string getStr() {
 }
 
 auto solve() {
-    char s[101];
-    cin.getline(s, 100, '\n');
-    cout<<s<<endl;
-    char *token = strtok(s," ");
-    vector<string> vs;
-    while(token) {
-        vs.pb(token);
-        token = strtok(NULL, " ");
+    int n,m;cin>>n>>m;
+    int mx = INT_MIN;
+    while(n--) {
+        int a; cin>>a;
+        mx = max(mx,a);
     }
-    // string f = vs[0], l = vs[sz(vs)-1];
-    // cout<<f<<" "<<l<<endl;
-    // if((f!="lala" and l!="miao") or (f=="lala" and l=="miao")) return "OMG>.< I don't know!\n";
-    // else if(f=="lala") return "Freda's\n";
-    // else return "Rainbow's\n";
+    while(m--) {
+        char c;cin>>c;
+        int l,r;cin>>l>>r;
+        if(l<=mx and mx<=r) {
+            if(c=='+') mx++;
+            else mx--;
+        }
+        cout<<mx<<" ";
+    }
+    cout<<endl;
 }
 
 int32_t main() {
     ios::sync_with_stdio(0); cin.tie(0); cout.tie(0);
     int t = 1;
     cin>>t;
-    cout<<t<<endl;
     while(t--) {
         // cout<<solve()<<endl;
         solve();

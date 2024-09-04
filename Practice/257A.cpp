@@ -60,13 +60,27 @@ class UnionFind {
 };
 
 auto solve() {
-    return 0;
+    int n,m,k;cin>>n>>m>>k;
+    // cout<<n<<" "<<m<<" "<<k<<" sdklfjsd"<<endl;
+    vi a = getInts(n);
+    // vi a(n);
+    // forl(i,n) cin>>a[i];
+    sort(all(a),greater<int>());
+    // fora(i,a) cout<<i<<" ";
+    // cout<<endl;
+    int sum = 0;
+    forl(i,n) {
+        sum += a[i];
+        // cout<<k<<" "<<m<<" "<<k-(i+1)+sum<<" "<<sum<<endl;
+        if(k-(i+1)+sum>=m) return (i+1);
+    }
+    return -1ll;
 }
 
 int32_t main() {
     ios::sync_with_stdio(0); cin.tie(0); cout.tie(0);
     int t = 1;
-    // cin>>t;cin.clear()
+    // cin>>t;
     while(t--) {
         cout<<solve()<<endl;
         // solve();

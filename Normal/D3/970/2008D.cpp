@@ -30,6 +30,13 @@ vi getInts(int n) {
     return arr;
 }
 
+// GET A STRING WITH SPACE AS A SINGLE STRING IN INPUT
+string getStr() {
+    string strIp;
+    getline(cin,strIp);
+    return strIp;
+}
+
 // UNION FIND CLASS
 class UnionFind {
     vi parent, size;
@@ -60,17 +67,54 @@ class UnionFind {
 };
 
 auto solve() {
-    return 0;
+    int n;cin>>n;
+    vector<int> p(n);
+    vector<int> F(n, 0);
+    vector<bool> visited(n, false);
+    
+    for (int i = 0; i < n; i++) {
+        cin >> p[i];
+        p[i]--;
+    }
+    
+    string s;
+    cin >> s;
+    
+    for (int i = 0; i < n; i++) {
+        if (!visited[i]) {
+            vector<int> cycle;
+            int black_count = 0;
+            int x = i;
+            
+            while (!visited[x]) {
+                visited[x] = true;
+                cycle.push_back(x);
+                if (s[x] == '0') {
+                    black_count++;
+                }
+                x = p[x];
+            }
+            
+            for (int j : cycle) {
+                F[j] = black_count;
+            }
+        }
+    }
+    
+    for (int i = 0; i < n; i++) {
+        cout << F[i] << " ";
+    }
+    cout << endl;
+    // return 0;
 }
 
 int32_t main() {
     ios::sync_with_stdio(0); cin.tie(0); cout.tie(0);
     int t = 1;
-    // cin>>t;cin.clear()
+    cin>>t;
     while(t--) {
-        cout<<solve()<<endl;
-        // solve();
+        // cout<<solve()<<endl;
+        solve();
     }
     cerr << "time taken : " << (float)clock() / CLOCKS_PER_SEC << " secs" << "\n";
 }
-

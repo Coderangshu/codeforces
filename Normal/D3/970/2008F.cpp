@@ -30,6 +30,13 @@ vi getInts(int n) {
     return arr;
 }
 
+// GET A STRING WITH SPACE AS A SINGLE STRING IN INPUT
+string getStr() {
+    string strIp;
+    getline(cin,strIp);
+    return strIp;
+}
+
 // UNION FIND CLASS
 class UnionFind {
     vi parent, size;
@@ -59,14 +66,42 @@ class UnionFind {
     vi getParentArr() {return this->parent;}
 };
 
+const int MOD = 1e9 + 7;
+
+int mod_exp(int base, int exp, int mod) {
+    int res = 1;
+    while (exp > 0) {
+        if (exp % 2 == 1) {
+            res = (res * base) % mod;
+        }
+        base = (base * base) % mod;
+        exp /= 2;
+    }
+    return res;
+}
+
 auto solve() {
-    return 0;
+    int n;cin>>n;
+    vi a = getInts(n);
+    int sum = 0, sum_of_squares = 0;
+    
+    forl(i,n) {
+        sum = (sum + a[i]) % MOD;
+        sum_of_squares = (sum_of_squares + (a[i] * a[i]) % MOD) % MOD;
+    }
+    
+    int P = (sum * sum % MOD - sum_of_squares + MOD) % MOD;
+    int Q = n * (n - 1) % MOD;
+    int Q_inv = mod_exp(Q, MOD - 2, MOD);
+    
+    int result = (P * Q_inv) % MOD;
+    return result;
 }
 
 int32_t main() {
     ios::sync_with_stdio(0); cin.tie(0); cout.tie(0);
     int t = 1;
-    // cin>>t;cin.clear()
+    cin>>t;
     while(t--) {
         cout<<solve()<<endl;
         // solve();

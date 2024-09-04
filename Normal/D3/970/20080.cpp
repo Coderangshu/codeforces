@@ -30,6 +30,13 @@ vi getInts(int n) {
     return arr;
 }
 
+// GET A STRING WITH SPACE AS A SINGLE STRING IN INPUT
+string getStr() {
+    string strIp;
+    getline(cin,strIp);
+    return strIp;
+}
+
 // UNION FIND CLASS
 class UnionFind {
     vi parent, size;
@@ -60,13 +67,16 @@ class UnionFind {
 };
 
 auto solve() {
-    return 0;
+    int an, bn;cin>>an>>bn;
+    if(an%2==0 and bn%2==0) return "YES";
+    if(an%2==0 and an>=2 and bn%2!=0) return "YES";
+    return "NO";
 }
 
 int32_t main() {
     ios::sync_with_stdio(0); cin.tie(0); cout.tie(0);
     int t = 1;
-    // cin>>t;cin.clear()
+    cin>>t;
     while(t--) {
         cout<<solve()<<endl;
         // solve();
