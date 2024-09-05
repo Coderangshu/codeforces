@@ -60,22 +60,25 @@ class UnionFind {
 };
 
 auto solve() {
-    int n,m,k;cin>>n>>m>>k;
-    vi a = getInts(n);
-    if(m<=k) return 0ll;
-    sort(all(a),greater<int>());
-    int sum = 0;
-    forl(i,n) {
-        sum += a[i];
-        if(k-(i+1)+sum>=m) return (i+1);
+    int n;cin>>n;
+    int nines = 9, sum = 0, ans = 0, i = 1;
+    while(sum<=n) {
+        ans += nines*i++;
+        // ten *= 10;
+        sum += nines;
+        // cout<<nines<<endl;
+        nines *= 10;
     }
-    return -1ll;
+    // cout<<i<<" "<<ans<<" "<<sum<<endl;
+    if(n>sum) ans += (n-sum)*i;
+    else ans -= (sum-n)*--i;
+    return ans;
 }
 
 int32_t main() {
     ios::sync_with_stdio(0); cin.tie(0); cout.tie(0);
     int t = 1;
-    // cin>>t;
+    // cin>>t;cin.clear()
     while(t--) {
         cout<<solve()<<endl;
         // solve();
