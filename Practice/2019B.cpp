@@ -93,16 +93,39 @@ int armax(vi &a) {
 }
 
 auto solve() {
-    return 0;
+    int n,q;cin>>n>>q;
+    vi x = getArr<int>(n);
+    unm<int,int> um;
+    int segs = 0;
+    // cerr<<"SEGGS"<<endl;
+    forl(i,n-1) {
+        segs += n-i-1;
+        um[segs]++;
+        segs -= i;
+        um[segs] += x[i+1]-x[i]-1;
+        // cerr<<segs<<" ";
+        if(i==n-2) um[segs]++;
+    }
+    // cerr<<endl;
+    fora(i,um) {
+        // cerr<<i.x<<" "<<i.y<<"; ";
+    }
+    // cerr<<endl;
+    forl(i,q) {
+        int e;cin>>e;
+        if(um.count(e) and um[e]!=0) cout<<um[e]<<" ";
+        else cout<<0<<" ";
+    }
+    cout<<endl;
 }
 
 int32_t main() {
     ios::sync_with_stdio(0); cin.tie(0); cout.tie(0);
     int t = 1;
-    // cin>>t;cin.clear();
+    cin>>t;cin.clear();
     while(t--) {
-        cout<<solve()<<endl;
-        // solve();
+        // cout<<solve()<<endl;
+        solve();
     }
     // cerr << "time taken : " << (float)clock() / CLOCKS_PER_SEC << " secs" << "\n";
 }

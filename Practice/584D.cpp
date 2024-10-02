@@ -92,8 +92,27 @@ int armax(vi &a) {
     return mx;
 }
 
+bool isPrime(int n) {
+    if(n<=3) return true;
+    fore(i,2,sqrt(n)+1) {
+        if(n%i==0) return false;
+    }
+    return true;
+}
+
 auto solve() {
-    return 0;
+    int n;cin>>n;
+    if(isPrime(n)) cout<<1<<endl<<n<<endl;
+    else {
+        n -= 3;
+        fore(i, 2, n/2) {
+            if(isPrime(i) and isPrime(n-i)) {
+                cout<<3<<endl<<3<<" "<<i<<" "<<n-i<<endl;
+                break;
+            }
+        }
+    }
+    return;
 }
 
 int32_t main() {
@@ -101,8 +120,8 @@ int32_t main() {
     int t = 1;
     // cin>>t;cin.clear();
     while(t--) {
-        cout<<solve()<<endl;
-        // solve();
+        // cout<<solve()<<endl;
+        solve();
     }
     // cerr << "time taken : " << (float)clock() / CLOCKS_PER_SEC << " secs" << "\n";
 }

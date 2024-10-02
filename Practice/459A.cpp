@@ -93,17 +93,31 @@ int armax(vi &a) {
 }
 
 auto solve() {
-    return 0;
+    int x1, y1, x2, y2;cin>>x1>>y1>>x2>>y2;
+    if(x1==x2) {
+        int d = abs(y1-y2);
+        cout<<x1+d<<" "<<y1<<" "<<x2+d<<" "<<y2<<endl;
+    } else if(y1==y2) {
+        int d = abs(x1-x2);
+        cout<<x1<<" "<<y1+d<<" "<<x2<<" "<<y2+d<<endl;
+    } else {
+        int xd = abs(x1-x2);
+        int yd = abs(y1-y2);
+        if(xd!=yd) cout<<-1<<endl;
+        else {
+            cout<<x2<<" "<<y1<<" "<<x1<<" "<<y2<<endl;
+        }
+    }
 }
 
 int32_t main() {
     ios::sync_with_stdio(0); cin.tie(0); cout.tie(0);
     int t = 1;
-    // cin>>t;cin.clear();
+    // cin>>t;cin.clear()
     while(t--) {
-        cout<<solve()<<endl;
-        // solve();
+        // cout<<solve()<<endl;
+        solve();
     }
-    // cerr << "time taken : " << (float)clock() / CLOCKS_PER_SEC << " secs" << "\n";
+    cerr << "time taken : " << (float)clock() / CLOCKS_PER_SEC << " secs" << "\n";
 }
 

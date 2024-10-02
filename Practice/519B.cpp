@@ -93,17 +93,34 @@ int armax(vi &a) {
 }
 
 auto solve() {
-    return 0;
+    int n;cin>>n;
+    int sum = 0;
+    forl(i,n) {
+        int e;cin>>e;
+        sum += e;
+    }
+    int nsum = 0;
+    forl(i,n-1) {
+        int e;cin>>e;
+        nsum += e;
+    }
+    int nnsum = 0;
+    forl(i,n-2) {
+        int e;cin>>e;
+        nnsum += e;
+    }
+    cout<<sum-nsum<<endl;
+    cout<<nsum-nnsum<<endl;
 }
 
 int32_t main() {
     ios::sync_with_stdio(0); cin.tie(0); cout.tie(0);
     int t = 1;
-    // cin>>t;cin.clear();
+    // cin>>t;cin.clear()
     while(t--) {
-        cout<<solve()<<endl;
-        // solve();
+        // cout<<solve()<<endl;
+        solve();
     }
-    // cerr << "time taken : " << (float)clock() / CLOCKS_PER_SEC << " secs" << "\n";
+    cerr << "time taken : " << (float)clock() / CLOCKS_PER_SEC << " secs" << "\n";
 }
 

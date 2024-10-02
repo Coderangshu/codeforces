@@ -93,13 +93,25 @@ int armax(vi &a) {
 }
 
 auto solve() {
-    return 0;
+    int n;cin>>n;
+    int mxo = INT_MIN, mxe = INT_MIN, en = 0, on = 0;
+    forl(i,n) {
+        int e;cin>>e;
+        if(i%2) {
+            mxo = max(mxo,e);
+            on += 1;
+        } else {
+            mxe = max(mxe,e);
+            en += 1;
+        }
+    }
+    return max(mxo+on,mxe+en);
 }
 
 int32_t main() {
     ios::sync_with_stdio(0); cin.tie(0); cout.tie(0);
     int t = 1;
-    // cin>>t;cin.clear();
+    cin>>t;cin.clear();
     while(t--) {
         cout<<solve()<<endl;
         // solve();

@@ -93,17 +93,21 @@ int armax(vi &a) {
 }
 
 auto solve() {
-    return 0;
+    int n,m;cin>>n>>m;
+    if(n==1) return 1ll;
+    int half = n>>1;
+    if(m>half) return m-1;
+    return m+1;
 }
 
 int32_t main() {
     ios::sync_with_stdio(0); cin.tie(0); cout.tie(0);
     int t = 1;
-    // cin>>t;cin.clear();
+    // cin>>t;cin.clear()
     while(t--) {
         cout<<solve()<<endl;
         // solve();
     }
-    // cerr << "time taken : " << (float)clock() / CLOCKS_PER_SEC << " secs" << "\n";
+    cerr << "time taken : " << (float)clock() / CLOCKS_PER_SEC << " secs" << "\n";
 }
 

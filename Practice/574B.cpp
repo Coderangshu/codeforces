@@ -93,17 +93,38 @@ int armax(vi &a) {
 }
 
 auto solve() {
-    return 0;
+    int n,m;cin>>n>>m;
+    uns<int> adj[n];
+    while(m--) {
+        int u,v;cin>>u>>v;
+        u--; v--;
+        adj[u].insert(v);
+        adj[v].insert(u);
+    }
+    int ans = INT_MAX;
+    forl(i,n) {
+        forl(j,n) {
+            if(adj[j].count(i)) {
+                forl(k,n) {
+                    if(adj[k].count(i) and adj[k].count(j)) {
+                        int sor = adj[i].size()+adj[j].size()+adj[k].size()-6;
+                        ans = min(ans,sor);
+                    } else continue;
+                }
+            } else continue;
+        }
+    }
+    return (ans==INT_MAX)?-1:ans;
 }
 
 int32_t main() {
     ios::sync_with_stdio(0); cin.tie(0); cout.tie(0);
     int t = 1;
-    // cin>>t;cin.clear();
+    // cin>>t;cin.clear()
     while(t--) {
         cout<<solve()<<endl;
         // solve();
     }
-    // cerr << "time taken : " << (float)clock() / CLOCKS_PER_SEC << " secs" << "\n";
+    cerr << "time taken : " << (float)clock() / CLOCKS_PER_SEC << " secs" << "\n";
 }
 

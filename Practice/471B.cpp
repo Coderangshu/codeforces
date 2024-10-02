@@ -93,7 +93,63 @@ int armax(vi &a) {
 }
 
 auto solve() {
-    return 0;
+    int n;cin>>n;
+    map<int,vi> mp;
+    forl(i,n) {
+        int e;cin>>e;
+        mp[e].pb(i);
+    }
+    int possibilities = 0;
+    fora(i,mp) {
+        int ln = len(i.y);
+        if(ln>=2) possibilities++;
+        if(ln>=3) {
+            possibilities = 100;
+            break;
+        }
+    }
+    if(possibilities<2) {
+        cout<<"NO"<<endl;
+        return;
+    }
+    cout<<"YES"<<endl;
+    int cnt = 0;
+    fora(i,mp) {
+        vi a = i.y;
+        // cerr<<i.x<<endl;
+        // fora(j,a) cerr<<j<<" ";
+        // cerr<<endl;
+        fora(j,a) cout<<j+1<<" ";
+        if(len(a)>1 and cnt==0) {
+            next_permutation(all(a));
+            mp[i.x] = a;
+            cnt++;
+        }
+        // fora(j,a) cerr<<j<<" ";
+        // cerr<<endl;
+    }
+    // cerr<<endl<<endl;
+    cout<<endl;
+    cnt = 0;
+    fora(i,mp) {
+        vi a = i.y;
+        // cerr<<i.x<<endl;
+        // fora(j,a) cerr<<j<<" ";
+        // cerr<<endl;
+        fora(j,a) cout<<j+1<<" ";
+        if(len(a)>1) {
+            if(cnt>=1 or len(a)>2) {
+                next_permutation(all(a));
+                mp[i.x] = a;
+            } else cnt++;
+        }
+        // fora(j,a) cerr<<j<<" ";
+        // cerr<<endl;
+    }
+    cout<<endl;
+    fora(i,mp) fora(j,i.y) cout<<j+1<<" ";
+    cout<<endl;
+    return;
 }
 
 int32_t main() {
@@ -101,8 +157,8 @@ int32_t main() {
     int t = 1;
     // cin>>t;cin.clear();
     while(t--) {
-        cout<<solve()<<endl;
-        // solve();
+        // cout<<solve()<<endl;
+        solve();
     }
     // cerr << "time taken : " << (float)clock() / CLOCKS_PER_SEC << " secs" << "\n";
 }

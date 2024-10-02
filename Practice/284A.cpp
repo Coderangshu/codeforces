@@ -92,8 +92,25 @@ int armax(vi &a) {
     return mx;
 }
 
+vi primeFactors(int n) {
+    vi ans;
+    int tn = n;
+    if(tn%2==0) ans.pb(2);
+    while(tn%2==0) tn /= 2;
+    for(int i=3;i<=sqrt(n); i += 2) {
+        if(tn%i==0) ans.pb(i);
+        while(tn%i==0) tn /= i;
+    }
+    if(tn>2) ans.pb(tn);
+    return ans;
+}
+
 auto solve() {
-    return 0;
+    int p;cin>>p;
+    int ans = p-1;
+    vi primeFactorList = primeFactors(p-1);
+    fora(i,primeFactorList) ans = int((ans*(i-1))/i);
+    return ans;
 }
 
 int32_t main() {

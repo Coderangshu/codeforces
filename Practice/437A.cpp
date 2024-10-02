@@ -7,12 +7,13 @@ using namespace std;
 #define mp make_pair
 #define pb push_back
 #define sqr(a) ((a) * (a))
-#define len(a) int(a.size())
+#define sz(a) int(a.size())
 #define all(a) a.begin(), a.end()
 #define forl(i,n) for(int i = 0; i < int(n); i++)
 #define forr(i,n) for(int i = n-1; i > -1; i--)
-#define fore(i, l, r) for(int i = int(l); i <= int(r); i++)
+#define fore(l, r) for(int i = int(l); i <= int(r); i++)
 #define fora(v,arr) for(auto v:arr)
+#define forenum(index, value, container) for (int index = 0, _size = container.size(); index < _size; ++index) for (auto& value = container[index]; index < _size; index = _size)
 #define unm unordered_map
 #define uns unordered_set
 #define INT_MAX LLONG_MAX
@@ -23,31 +24,21 @@ typedef long double ld;
 using pii = pair<int, int>;
 typedef vector<long long> vi;
 
-// GET ARRAY AS INPUT OF SIZE N
-template<typename T> vector<T> getArr(int &n) {
-    vector<T> arr(n);
+// GET INTEGER ARRAY AS INPUT OF SIZE N
+vi getInts(int n) {
+    vi arr(n);
     forl(i,n) cin>>arr[i];
     return arr;
 }
 
 // GET UNORDERED MAP AS INPUT WITH FREQUENCY OF EACH NUMBER
-template<typename T> unm<T,int> getMapOfFreq(int &n) {
-    unm<T,int> um;
+unm<int,int> getIntsinUM(int n) {
+    unm<int,int> um;
     forl(i,n) {
-        T e;cin>>e;
+        int e;cin>>e;
         um[e]++;
     }
     return um;
-}
-
-// GET UNORDERED SET AS INPUT
-template<typename T> uns<T> getSet(int &n) {
-    uns<T> us;
-    forl(i,n) {
-        T e;cin>>e;
-        us.insert(e);
-    }
-    return us;
 }
 
 // UNION FIND CLASS
@@ -79,31 +70,44 @@ class UnionFind {
     vi getParentArr() {return this->parent;}
 };
 
-
-int armin(vi &a) {
-    int mn = INT_MAX;
-    fora(i,a) mn = min(mn,i);
-    return mn;
-}
-
-int armax(vi &a) {
-    int mx = INT_MIN;
-    fora(i,a) mx = max(mx,i);
-    return mx;
-}
-
 auto solve() {
-    return 0;
+    vector<string> ns;
+    forl(i,4) {
+        string str;getline(cin,str);
+        ns.pb(str);
+    }
+    int goodStringCnt = 0;
+    string good;
+    forl(i,4) {
+        int cnt = 0, nsi = ns[i].length();
+        // cout<<ns[i]<<": ";
+        forl(j,4) {
+            int nsj = ns[j].length();
+            if(i!=j) {
+                // cout<<ns[j]<<", ";
+                if((nsi-2)<=(nsj-2)/2) cnt--;
+                if((nsi-2)>=(nsj-2)*2) cnt++;
+            }
+        }
+        // cout<<cnt<<endl;
+        if(abs(cnt)==3) {
+            goodStringCnt++;
+            good = ns[i].substr(0,1);
+        }
+    }
+    if(goodStringCnt==1) return good;
+    good = "C";
+    return good;
 }
 
 int32_t main() {
     ios::sync_with_stdio(0); cin.tie(0); cout.tie(0);
     int t = 1;
-    // cin>>t;cin.clear();
+    // cin>>t;cin.clear()
     while(t--) {
         cout<<solve()<<endl;
         // solve();
     }
-    // cerr << "time taken : " << (float)clock() / CLOCKS_PER_SEC << " secs" << "\n";
+    cerr << "time taken : " << (float)clock() / CLOCKS_PER_SEC << " secs" << "\n";
 }
 

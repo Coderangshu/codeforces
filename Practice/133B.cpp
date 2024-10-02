@@ -7,12 +7,13 @@ using namespace std;
 #define mp make_pair
 #define pb push_back
 #define sqr(a) ((a) * (a))
-#define len(a) int(a.size())
+#define sz(a) int(a.size())
 #define all(a) a.begin(), a.end()
 #define forl(i,n) for(int i = 0; i < int(n); i++)
 #define forr(i,n) for(int i = n-1; i > -1; i--)
-#define fore(i, l, r) for(int i = int(l); i <= int(r); i++)
+#define fore(l, r) for(int i = int(l); i <= int(r); i++)
 #define fora(v,arr) for(auto v:arr)
+#define forenum(index, value, container) for (int index = 0, _size = container.size(); index < _size; ++index) for (auto& value = container[index]; index < _size; index = _size)
 #define unm unordered_map
 #define uns unordered_set
 #define INT_MAX LLONG_MAX
@@ -23,31 +24,21 @@ typedef long double ld;
 using pii = pair<int, int>;
 typedef vector<long long> vi;
 
-// GET ARRAY AS INPUT OF SIZE N
-template<typename T> vector<T> getArr(int &n) {
-    vector<T> arr(n);
+// GET INTEGER ARRAY AS INPUT OF SIZE N
+vi getInts(int &n) {
+    vi arr(n);
     forl(i,n) cin>>arr[i];
     return arr;
 }
 
 // GET UNORDERED MAP AS INPUT WITH FREQUENCY OF EACH NUMBER
-template<typename T> unm<T,int> getMapOfFreq(int &n) {
-    unm<T,int> um;
+unm<int,int> getIntsinUM(int &n) {
+    unm<int,int> um;
     forl(i,n) {
-        T e;cin>>e;
+        int e;cin>>e;
         um[e]++;
     }
     return um;
-}
-
-// GET UNORDERED SET AS INPUT
-template<typename T> uns<T> getSet(int &n) {
-    uns<T> us;
-    forl(i,n) {
-        T e;cin>>e;
-        us.insert(e);
-    }
-    return us;
 }
 
 // UNION FIND CLASS
@@ -92,18 +83,51 @@ int armax(vi &a) {
     return mx;
 }
 
+unm<char,string> um;
+int mod;
+
+int power(int a , int b , int m) {
+    int ans = 1;
+    while(b > 0) {
+        if(b & 1) {
+            ans = ans * a % m;
+        }
+        b = b / 2;
+        a = a * a % m;
+    }
+    return ans;
+}
+
 auto solve() {
-    return 0;
+    string s;cin>>s;
+    string ans = "";
+    fora(i,s) ans += um[i];
+    reverse(all(ans));
+    int ansi = 0, pow = 1;
+    forl(i,sz(ans)) {
+        if(ans[i]=='1')
+            ansi += power(2ll,i,mod)%mod;
+    }
+    return (ansi%mod);
 }
 
 int32_t main() {
     ios::sync_with_stdio(0); cin.tie(0); cout.tie(0);
     int t = 1;
-    // cin>>t;cin.clear();
+    // cin>>t;cin.clear()
+    um['>'] = "1000";
+    um['<'] = "1001";
+    um['+'] = "1010";
+    um['-'] = "1011";
+    um['.'] = "1100";
+    um[','] = "1101";
+    um['['] = "1110";
+    um[']'] = "1111";
+    mod = (1e6)+3;
     while(t--) {
         cout<<solve()<<endl;
         // solve();
     }
-    // cerr << "time taken : " << (float)clock() / CLOCKS_PER_SEC << " secs" << "\n";
+    cerr << "time taken : " << (float)clock() / CLOCKS_PER_SEC << " secs" << "\n";
 }
 
