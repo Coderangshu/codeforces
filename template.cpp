@@ -9,10 +9,10 @@ using namespace std;
 #define sqr(a) ((a) * (a))
 #define len(a) int(a.size())
 #define all(a) a.begin(), a.end()
-#define forl(i,n) for(int i = 0; i < int(n); i++)
-#define forr(i,n) for(int i = n-1; i > -1; i--)
-#define fore(i, l, r) for(int i = int(l); i <= int(r); i++)
-#define fora(v,arr) for(auto v:arr)
+#define f(i, start, end, gap) for(int i=start; i<end; i+=gap)
+#define rf(i, start, end, gap) for(int i=start; i>=end; i-=gap)
+#define fa(v,arr) for(auto v:arr)
+#define rfa(v,arr) for(auto v:reverse(all(arr)))
 #define unm unordered_map
 #define uns unordered_set
 #define INT_MAX LLONG_MAX
@@ -26,14 +26,14 @@ typedef vector<long long> vi;
 // GET ARRAY AS INPUT OF SIZE N
 template<typename T> vector<T> getArr(int &n) {
     vector<T> arr(n);
-    forl(i,n) cin>>arr[i];
+    f(i,0,n,1) cin>>arr[i];
     return arr;
 }
 
 // GET UNORDERED MAP AS INPUT WITH FREQUENCY OF EACH NUMBER
 template<typename T> unm<T,int> getMapOfFreq(int &n) {
     unm<T,int> um;
-    forl(i,n) {
+    f(i,0,n,1) {
         T e;cin>>e;
         um[e]++;
     }
@@ -43,7 +43,7 @@ template<typename T> unm<T,int> getMapOfFreq(int &n) {
 // GET UNORDERED SET AS INPUT
 template<typename T> uns<T> getSet(int &n) {
     uns<T> us;
-    forl(i,n) {
+    f(i,0,n,1) {
         T e;cin>>e;
         us.insert(e);
     }
@@ -57,7 +57,7 @@ class UnionFind {
     UnionFind(int n) {
         this->parent.resize(n);
         this->size.assign(n,1);
-        forl(i,n) parent[i] = i;
+        f(i,0,n,1) parent[i] = i;
     }
 
     void Union(int a, int b) {
@@ -82,13 +82,13 @@ class UnionFind {
 
 int armin(vi &a) {
     int mn = INT_MAX;
-    fora(i,a) mn = min(mn,i);
+    fa(i,a) mn = min(mn,i);
     return mn;
 }
 
 int armax(vi &a) {
     int mx = INT_MIN;
-    fora(i,a) mx = max(mx,i);
+    fa(i,a) mx = max(mx,i);
     return mx;
 }
 

@@ -92,10 +92,61 @@ int armax(vi &a) {
     return mx;
 }
 
-auto solve() {
+bool isPossible(int ds, int k, vi &a) {
+    fora(i,a) k -= max(0ll,ds-i);
+    return (k<0)?false:true;
+}
+
+auto solve1() {
     int n,k;cin>>n>>k;
     vi a = getArr<int>(n);
-    return 0;
+    int mx = armax(a);
+    int sum = accumulate(all(a),0ll);
+    // largest possible size of each deck can be n
+    // we consider ans as n to begin with
+    int ans = n, totCards = sum+k;
+    while(ans>=1) {
+        // totCards should be divisible by ans as each stack will contain ans no of cards
+        // thus making it divisible
+        totCards = (sum+k)-(sum+k)%ans;
+        // if now totCards < cards already with him then this ans is not possible
+        // decrement ans and check for that ans
+        if(totCards>=sum) {
+            int noOfStacks = totCards/ans;
+            if(mx<=noOfStacks) return ans;
+            else ans--;
+        } else ans--;
+    }
+    return ans+1;
+}
+
+int n,k,sum=0,mx=INT_MIN;
+bool psbl(int m) {
+    int totcards = ((sum+k)/m)*m;
+    if(totcards>=sum) {
+        if(totcards/m<mx) return false;
+        return true;
+    }
+    return false;
+}
+
+auto solve() {
+    sum = 0, mx = INT_MIN;
+    cin>>n>>k;
+    forl(i,n) {
+        int e;cin>>e;
+        sum += e;
+        mx = max(mx,e);
+    }
+    int l = 1, r = n, ans;
+    while(l<=r) {
+        int m = l+(r-l)/2;
+        if(psbl(m)) {
+            ans = m;
+            l = m+1;
+        } else r = m-1;
+    }
+    return ans;
 }
 
 int32_t main() {
