@@ -95,19 +95,37 @@ int armax(vi &a) {
 auto solve() {
     int n;cin>>n;
     vi a = getArr<int>(n);
-    int mn = a[0], mx = a[0], mni = 0,mxi = 0, ans = INT_MIN;
-    forl(i,n) {
-        if(a[i]<mn) {
-            mni = i;
-            mn = a[i];
+    vi d(n-1,0);
+    forl(i,n-1) d[i] = a[i+1]-a[i];
+    
+    // fora(i,d) cerr<<i<<" ";
+    // cerr<<endl;
+
+    int zc = (d[0]==0)?1:0, start = 0, end = 0, prev = d[0], ans = 1;
+            // cerr<<0<<" "<<start<<" "<<end<<" "<<prev<<" "<<ans<<" "<<zc<<endl;
+
+    fore(i,1,n-2) {
+        end++;
+        if(d[i]==0) {
+            zc++;
+            ans = max(ans,end-start+1);
+        } else {
+            if(prev==0) prev = d[i];
+            else {
+                if(prev+d[i]!=0) {
+                    ans = max(ans,end-start);
+                    prev = d[i];
+                    start = i-zc;
+                } else {
+                    ans = max(ans,end-start+1);
+                    prev = d[i];
+                }
+            }
+            zc = 0;
         }
-        if(a[i]>mx) {
-            mxi = i;
-            mx = a[i];
-        }
-        if(mx-mn<=1) ans = max(ans,abs(mxi-mni));
+        // cerr<<i<<" "<<start<<" "<<end<<" "<<prev<<" "<<ans<<" "<<zc<<endl;
     }
-    return ans;
+    return min(n,ans+1);
 }
 
 int32_t main() {
