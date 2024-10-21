@@ -91,25 +91,65 @@ int armax(vi &a) {
     fa(i,a) mx = max(mx,i);
     return mx;
 }
-int solve2(int n, int a, int b, int c) {
-    if(a>b) return solve2(n,b,a,c);
-    if(b>c) return solve2(n,a,c,b);
-    int na = n/a+2, nb = n/b+2;
-    int ans = INT_MIN;
-    f(i,0,na,1) {
-        f(j,0,nb,1) {
-            int sm = a*i+b*j;
-            if(sm>n) break;
-            if((n-sm)%c==0) ans = max(ans,i+j+((n-sm)/c));
-        }
-    }
-    return ans;
-}
 
 auto solve() {
-    int n,a,b,c;cin>>n>>a>>b>>c;
-    return solve2(n,a,b,c);
-    // return 0;
+    int m,n;cin>>m>>n;
+    vector<vi> b(m,vi(n));
+    f(i,0,m,1) {
+        f(j,0,n,1) {
+            cin>>b[i][j];
+        }
+    }
+    vector<vi> ans(m,vi(n,1));
+    vi row(m), col(n);
+    f(i,0,m,1) {
+        int k = 0;
+        f(j,0,n,1) k += b[i][j];
+        if(k==n) row[i] = 1;
+    }
+    f(i,0,n,1) {
+        int k = 0;
+        f(j,0,m,1) k += b[j][i];
+        if(k==m) col[i] = 1;
+    }
+    f(i,0,m,1)
+        f(j,0,n,1)
+            ans[i][j] = (row[i] and col[j]);
+    row.assign(m,0);
+    col.assign(n,0);
+    f(i,0,m,1) {
+        int k = 0;
+        f(j,0,n,1) k += ans[i][j];
+        if(k>0) row[i] = 1;
+    }
+    f(i,0,n,1) {
+        int k = 0;
+        f(j,0,m,1) k += ans[j][i];
+        if(k>0) col[i] = 1;
+    }
+    // f(i,0,m,1) {
+    //     f(j,0,n,1) cerr<<ans[i][j]<<" ";
+    //     cerr<<endl;
+    // }
+    // fa(i,row) cerr<<i<<" ";
+    // cerr<<endl;
+    // fa(i,col) cerr<<i<<" ";
+    // cerr<<endl;
+    f(i,0,m,1) {
+        f(j,0,n,1) {
+            int e = (row[i] or col[j]);
+            if(e!=b[i][j]) {
+                cout<<"NO"<<endl;
+                return;
+            }
+        }
+    }
+    cout<<"YES"<<endl;
+    f(i,0,m,1) {
+        f(j,0,n,1) cout<<ans[i][j]<<" ";
+        cout<<endl;
+    }
+    return;
 }
 
 int32_t main() {
@@ -117,8 +157,8 @@ int32_t main() {
     int t = 1;
     // cin>>t;cin.clear();
     while(t--) {
-        cout<<solve()<<endl;
-        // solve();
+        // cout<<solve()<<endl;
+        solve();
     }
     // cerr << "time taken : " << (float)clock() / CLOCKS_PER_SEC << " secs" << "\n";
 }

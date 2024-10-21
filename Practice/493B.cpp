@@ -91,25 +91,35 @@ int armax(vi &a) {
     fa(i,a) mx = max(mx,i);
     return mx;
 }
-int solve2(int n, int a, int b, int c) {
-    if(a>b) return solve2(n,b,a,c);
-    if(b>c) return solve2(n,a,c,b);
-    int na = n/a+2, nb = n/b+2;
-    int ans = INT_MIN;
-    f(i,0,na,1) {
-        f(j,0,nb,1) {
-            int sm = a*i+b*j;
-            if(sm>n) break;
-            if((n-sm)%c==0) ans = max(ans,i+j+((n-sm)/c));
-        }
-    }
-    return ans;
-}
 
 auto solve() {
-    int n,a,b,c;cin>>n>>a>>b>>c;
-    return solve2(n,a,b,c);
-    // return 0;
+    int n;cin>>n;
+    vi a,b;
+    int sa = 0, sb = 0, last = -1;
+    f(i,0,n,1) {
+        int e;cin>>e;
+        if(e>0) a.pb(e),sa += e, last = 0;
+        else b.pb(-e), sb -= e, last = 1;
+    }
+    // fa(i,a) cerr<<i<<" ";
+    // cerr<<endl;
+    // fa(i,b) cerr<<i<<" ";
+    // cerr<<endl;
+    if(sa>sb) return "first";
+    else if(sb>sa) return "second";
+    else {
+        int i = 0, nab = min(len(a),len(b));
+        while(i<nab) {
+            if(a[i]!=b[i]) {
+                if(a[i]>b[i]) return "first";
+                else return "second";
+            }
+            i++;
+        }
+        if(last==0) return "first";
+        else return "second";
+    }
+    // return "";
 }
 
 int32_t main() {
