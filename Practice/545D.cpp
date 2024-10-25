@@ -50,7 +50,18 @@ int armin(vi &a) {int mn = INT_MAX;fa(i,a) mn = min(mn,i);return mn;}
 // GET MAX OF ARRAY
 int armax(vi &a) {int mx = INT_MIN;fa(i,a) mx = max(mx,i);return mx;}
 
+int recursion(vi &t, int time, int ind) {
+    int n = len(t);
+    if(ind==n) return 0;
+    if(t[ind]>time) return 0;
+    
+    return 0;
+}
+
 auto solve() {
+    int n;cin>>n;
+    vi t = getArr<int>(n);
+    sort(all(t));
     return 0;
 }
 

@@ -81,67 +81,54 @@ class UnionFind {
 
 
 auto solve() {
-    int n,m;cin>>n>>m;
-    vi r = getArr<int>(n);
-    int totPoint = 0;
-    // cur and prev will store the intelligence tests passed
-    // size of cur and prev is totPoint upto now
-    // example - if totPoint = 7 then cur[3] contains the # of tests passed
-    // when 3 points are given to intelligence and (7-3=) 4 points are given to
-    // strength
-    vi cur, prev(1,0), ichk, schk;
+    int n;cin>>n;
+    vector<pii> an(n);
+    vi ann(2*n);
     f(i,0,n,1) {
-        if(r[i]>0) ichk.pb(r[i]);
-        else if(r[i]<0) schk.pb(-r[i]);
-        else {
-            totPoint++;
-            cur.assign(totPoint+1,0ll);
-            sort(all(ichk));
-            sort(all(schk));
-            f(j,0,totPoint+1,1) {
-                // giving this point to both intelligence and strength
-                // then we will calculate the max of both
+        int a,b;cin>>a>>b;
+        an[i] = {a,b};
+        ann[2*i] = a;
+        ann[2*i+1] = b;
+    }
 
-                // if this point is given intelligence, thus now intelligence point
-                // will be j thus we take the tests passed when intelligence had j-1
-                // points in the prev state
-                if(j>0) {
-                    int prevIPnt = j-1, prevSPnt = (totPoint-1)-(j-1);
-                    // # of tests passed from last point collected upto this point before adding this point
-                    int newTestsPassed = (ub(all(ichk),prevIPnt)-ichk.begin()) + (ub(all(schk),prevSPnt)-schk.begin());
-                    cur[j] = max(cur[j],prev[j-1]+newTestsPassed);
-                }
-                // if this point is given to strength then earlier and now intelligence point
-                // will be same so we use the jth value of previous array
-                if(j<totPoint) {
-                    int prevIPnt = j, prevSPnt = (totPoint-1)-j;
-                    int newTestsPassed = (ub(all(ichk),prevIPnt)-ichk.begin()) + (ub(all(schk),prevSPnt)-schk.begin());
-                    cur[j] = max(cur[j],prev[j]+newTestsPassed);
-                }
-            }
-            ichk.clear(),schk.clear();
-            prev = cur;
-        }
+    sort(all(ann));
+    unm<int ,int> mp;
+    int ind = 0;
+    f(i,0,2*n,1) {
+        if(mp.count(ann[i])==0) mp[ann[i]] = ind++;
     }
-    if(len(ichk)!=0 or len(schk)!=0) {
-        sort(all(ichk)), sort(all(schk));
-        // at end all the m points have been added to the prev
-        // now if any pending tests have occured after the last point that needs to be added
-        f(i,0,m+1,1) {
-            int ipnts = i, spnts = m-i;
-            int newTestsPassed = (ub(all(ichk),ipnts)-ichk.begin()) + (ub(all(schk),spnts)-schk.begin());
-            prev[i] += newTestsPassed;
-        }
+
+    vector<pii> compressed(n);
+    f(i,0,n,1) {
+        compressed[i].x = mp[an[i].x];
+        compressed[i].y = mp[an[i].y];
     }
-    return armax(prev);
+
+    vector<vi> ans(n,vi(3,0));
+    f(i,0,n,1) {
+        int sum = compressed[i].x + compressed[i].y;
+        ans[i][0] = sum;
+        ans[i][1] = an[i].x;
+        ans[i][2] = an[i].y;
+    }
+
+    sort(all(ans),[](const vi &a, const vi &b){
+        return a[0]<b[0];
+    });
+
+    f(i,0,n,1) {
+        cout<<ans[i][1]<<" "<<ans[i][2]<<" ";
+    }
+    cout<<endl;
+    return;
 }
 
 int32_t main() {
     ios::sync_with_stdio(0); cin.tie(0); cout.tie(0);int t = 1;
-    // cin>>t;cin.clear();
+    cin>>t;cin.clear();
     while(t--) {
-        cout<<solve()<<endl;
-        // solve();
+        // cout<<solve()<<endl;
+        solve();
     }
     // cerr << "time taken : " << (float)clock() / CLOCKS_PER_SEC << " secs" << "\n";
 }

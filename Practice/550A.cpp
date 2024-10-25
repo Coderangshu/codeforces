@@ -51,7 +51,35 @@ int armin(vi &a) {int mn = INT_MAX;fa(i,a) mn = min(mn,i);return mn;}
 int armax(vi &a) {int mx = INT_MIN;fa(i,a) mx = max(mx,i);return mx;}
 
 auto solve() {
-    return 0;
+    string s;cin>>s;
+    int n = len(s);
+    int i = 0;
+    bool got = false;
+    // first ab then ba
+    while(i<n-1) {
+        char c = s[i], cc = s[i+1];
+        if(!got and c=='A' and cc=='B') {
+            got = true;
+            i += 2;
+            continue;
+        }
+        if(got and c=='B' and cc=='A') return "YES";
+        i++;
+    }
+    i = 0;
+    got = false;
+    // first ba then ab
+    while(i<n-1) {
+        char c = s[i], cc = s[i+1];
+        if(!got and c=='B' and cc=='A') {
+            got = true;
+            i += 2;
+            continue;
+        }
+        if(got and c=='A' and cc=='B') return "YES";
+        i++;
+    }
+    return "NO";
 }
 
 int32_t main() {

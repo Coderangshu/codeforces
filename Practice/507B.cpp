@@ -51,7 +51,17 @@ int armin(vi &a) {int mn = INT_MAX;fa(i,a) mn = min(mn,i);return mn;}
 int armax(vi &a) {int mx = INT_MIN;fa(i,a) mx = max(mx,i);return mx;}
 
 auto solve() {
-    return 0;
+    int r,x0,y0,x1,y1;cin>>r>>x0>>y0>>x1>>y1;
+    double d = (x1-x0)*(x1-x0) + (y1-y0)*(y1-y0);
+    d = sqrt(d);
+    if(d==0) return 0ll;
+    // cerr<<d<<endl;
+    double ans = d/(2*r);
+    // if(ans>0) ans--;
+    // cerr<<ans<<endl;
+    if(int(d)!=d or int(d)%(2*r)!=0) ans++;
+    // cerr<<ans<<endl;
+    return int(ans);
 }
 
 int32_t main() {
