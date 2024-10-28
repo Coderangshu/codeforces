@@ -44,24 +44,38 @@ int armin(vi &a) {int mn = INT_MAX;fa(i,a) mn = min(mn,i);return mn;}
 // GET MAX OF ARRAY
 int armax(vi &a) {int mx = INT_MIN;fa(i,a) mx = max(mx,i);return mx;}
 
-auto solve() {
-    int n;cin>>n;
-    vi t = getArr<int>(n);
-    sort(all(t));
-    int ans = 0, sm = 0, i = 0;
-    while(i<n) {
-        if(sm<=t[i]) {
-            ans++;
-            sm += t[i];
+unordered_map<int, vi> unm;
+map<int, int> dp;
+
+int recursion(int ind) {
+    if (dp.count(ind)) return dp[ind];
+    int ans = ind;
+    if (unm.count(ind)) {
+        fa(i,unm[ind]) {
+            int newi = ind + i - 1;
+            ans = max(ans, recursion(newi));
         }
-        i++;
     }
+    return dp[ind] = ans;
+}
+
+auto solve() {
+    unm.clear();
+    dp.clear();
+    int n;cin>>n;
+    vi arr(n+1);
+    f(i,1,n+1,1) cin >> arr[i];
+    f(i,2,n+1,1) {
+        int ni = arr[i] + i - 1;
+        unm[ni].push_back(i);
+    }
+    int ans = recursion(n);
     return ans;
 }
 
 int32_t main() {
     ios::sync_with_stdio(0); cin.tie(0); cout.tie(0);int t = 1;
-    // cin>>t;cin.clear();
+    cin>>t;cin.clear();
     while(t--) {
         cout<<solve()<<endl;
         // solve();

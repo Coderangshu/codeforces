@@ -46,22 +46,18 @@ int armax(vi &a) {int mx = INT_MIN;fa(i,a) mx = max(mx,i);return mx;}
 
 auto solve() {
     int n;cin>>n;
-    vi t = getArr<int>(n);
-    sort(all(t));
-    int ans = 0, sm = 0, i = 0;
-    while(i<n) {
-        if(sm<=t[i]) {
-            ans++;
-            sm += t[i];
-        }
-        i++;
+    int mxw = 0, mxh = 0;
+    while(n--) {
+        int w,h;cin>>w>>h;
+        mxw = max(mxw,w);
+        mxh = max(mxh,h);
     }
-    return ans;
+    return 2*(mxw+mxh);
 }
 
 int32_t main() {
     ios::sync_with_stdio(0); cin.tie(0); cout.tie(0);int t = 1;
-    // cin>>t;cin.clear();
+    cin>>t;cin.clear();
     while(t--) {
         cout<<solve()<<endl;
         // solve();

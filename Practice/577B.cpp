@@ -45,18 +45,10 @@ int armin(vi &a) {int mn = INT_MAX;fa(i,a) mn = min(mn,i);return mn;}
 int armax(vi &a) {int mx = INT_MIN;fa(i,a) mx = max(mx,i);return mx;}
 
 auto solve() {
-    int n;cin>>n;
-    vi t = getArr<int>(n);
-    sort(all(t));
-    int ans = 0, sm = 0, i = 0;
-    while(i<n) {
-        if(sm<=t[i]) {
-            ans++;
-            sm += t[i];
-        }
-        i++;
-    }
-    return ans;
+    int n,m;cin>>n>>m;
+    vi a = getArr<int>(n);
+    
+    return 0;
 }
 
 int32_t main() {

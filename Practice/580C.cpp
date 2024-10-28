@@ -82,16 +82,16 @@ class UnionFind {
 int n = 0, m = 0;
 vi cat;
 
-int dfs(vi adj[], int ind, int parent, int k) {
-    if(k>m) return 0;
-    if(len(adj[ind])==1 and adj[ind][0]==parent and k<=m) return 1;
-    int ans = 0;
+int dfs(vi adj[], int ind, int parent, int catsTillNow) {
+    if(catsTillNow>m) return 0;
+    if(len(adj[ind])==1 and adj[ind][0]==parent) return 1;
+    int ans = 0, catsNow;
     fa(i, adj[ind]) {
         if(i==parent) continue;
-        int add = (cat[i])?0:k;
-        add += cat[i];
-        ans += dfs(adj, i, ind,add);
-        cerr<<ind<<" "<<i<<" "<<ans<<" "<<add<<endl;
+        if(cat[i]==1) catsNow = catsTillNow+1;
+        else catsNow = 0;
+        ans += dfs(adj, i, ind, catsNow);
+        // cerr<<ind<<" "<<i<<" "<<ans<<" "<<catsNow<<endl;
     }
     return ans;
 }
@@ -99,7 +99,6 @@ int dfs(vi adj[], int ind, int parent, int k) {
 auto solve() {
     cin>>n>>m;
     cat = getArr<int>(n);
-    print(cat);
     vi adj[n];
     f(i,0,n-1,1) {
         int u,v;cin>>u>>v;
@@ -107,9 +106,9 @@ auto solve() {
         adj[u].pb(v);
         adj[v].pb(u);
     }
-    fa(i,adj) {
-        print(i);
-    }
+    // fa(i,adj) {
+    //     print(i);
+    // }
     return dfs(adj,0,-1,cat[0]);
 }
 
