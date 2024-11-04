@@ -51,28 +51,27 @@ int armin(vi &a) {int mn = INT_MAX;fa(i,a) mn = min(mn,i);return mn;}
 int armax(vi &a) {int mx = INT_MIN;fa(i,a) mx = max(mx,i);return mx;}
 
 auto solve() {
-    int n;cin>>n;
-    vector<pii> v;
-    f(i,0,n,1) {
-        int a,b;cin>>a>>b;
-        v.pb({a,b});
+    int x,y,k;cin>>x>>y>>k;
+    if(x>y) {
+        int t = x;
+        x = y;
+        y = t;
     }
-    sort(all(v));
-    // print(v);
-    int lastExamTakenOn = v[0].y;
-    f(i,1,n,1) {
-        if(v[i].y>=lastExamTakenOn) lastExamTakenOn = v[i].y;
-        else lastExamTakenOn = v[i].x;
+    if(k<=x and k<=y) {
+        cout<<0<<" "<<0<<" "<<k<<" "<<0<<endl<<0<<" "<<0<<" "<<0<<" "<<k<<endl;
+        return;
     }
-    return lastExamTakenOn;
+    int a = int(sqrt(k*k-x*x))+1;
+    cout<<0<<" "<<0<<" "<<a<<" "<<a<<endl<<0<<" "<<a<<" "<<a<<" "<<0<<endl;
+    return;
 }
 
 int32_t main() {
     ios::sync_with_stdio(0); cin.tie(0); cout.tie(0);int t = 1;
-    // cin>>t;cin.clear();
+    cin>>t;cin.clear();
     while(t--) {
-        cout<<solve()<<endl;
-        // solve();
+        // cout<<solve()<<endl;
+        solve();
     }
     // cerr << "time taken : " << (float)clock() / CLOCKS_PER_SEC << " secs" << "\n";
 }

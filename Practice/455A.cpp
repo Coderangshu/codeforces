@@ -52,19 +52,20 @@ int armax(vi &a) {int mx = INT_MIN;fa(i,a) mx = max(mx,i);return mx;}
 
 auto solve() {
     int n;cin>>n;
-    vector<pii> v;
-    f(i,0,n,1) {
-        int a,b;cin>>a>>b;
-        v.pb({a,b});
+    vi a = getArr<int>(n);
+    map<int,int> mp;
+    fa(i,a) mp[i]++;
+    vector<pii> vp;
+    fa(i,mp) vp.pb({i.x,i.y});
+    vi dp(len(vp),0);
+    f(i,0,len(vp),1) {
+        int pri = i-1;
+        if(pri>=0 and vp[pri].x==vp[i].x-1) pri--;
+        dp[i] = vp[i].x*vp[i].y;
+        if(pri!=-1) dp[i] += dp[pri]; 
+        if(i!=0) dp[i] = max(dp[i],dp[i-1]);
     }
-    sort(all(v));
-    // print(v);
-    int lastExamTakenOn = v[0].y;
-    f(i,1,n,1) {
-        if(v[i].y>=lastExamTakenOn) lastExamTakenOn = v[i].y;
-        else lastExamTakenOn = v[i].x;
-    }
-    return lastExamTakenOn;
+    return dp[len(vp)-1];
 }
 
 int32_t main() {
