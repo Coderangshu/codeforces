@@ -35,17 +35,21 @@ int armin(vi &a) {int mn = INT_MAX;fa(i,a) mn = min(mn,i);return mn;}//GET MIN O
 int armax(vi &a) {int mx = INT_MIN;fa(i,a) mx = max(mx,i);return mx;}//GET MAX OF ARRAY
 
 auto solve() {
-    int mod = 1e9+7;
-    int n,m;cin>>n>>m;
-    vector<string> v(n);
-    f(i,0,n,1) cin>>v[i];
-    int ans = 1;
-    f(mi,0,m,1) {
-        set<char> st;
-        f(ni,0,n,1) st.insert(v[ni][mi]);
-        ans = (ans*len(st))%mod;
+    int n;cin>>n;
+    int l = 0, r = ceil(n/7);
+    while (l<=r) {
+        int m = (l+r)>>1;
+        int num = 0;
+        int t = m;
+        int i = 1;
+        while(t) {
+            if(t&1) num = i*7+num;
+            else num = i*4+num;
+            i *= 10;
+            t >>= 1;
+        }
     }
-    return ans;
+    return 0;
 }
 
 int32_t main() {ios::sync_with_stdio(0); cin.tie(0); cout.tie(0);int t = 1;
