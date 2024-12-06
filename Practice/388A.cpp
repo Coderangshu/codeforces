@@ -17,19 +17,15 @@ using namespace std;
 #define rfa(v,arr) for(auto v:reverse(all(arr)))
 #define INT_MAX LLONG_MAX
 #define INT_MIN LLONG_MIN
-#define yes cout<<"YES"<<endl;
-#define no cout<<"NO"<<endl;
 
 using ll = long long;
 typedef long double ld;
 using pii = pair<int, int>;
 typedef vector<long long> vi;
 
-// PRINT any datatype using these templates
-void print(void) {return;}
-template<typename T> void print(T v) {cout<<v<<endl;}
+// PRINT ARRAY, MAP using this templates
+template<typename T> void print(T v) {return;}
 template<typename T> void print(vector<T> arr) {fa(i,arr) cout<<i<<" ";cout<<endl;}
-template<typename T1> void print(vector<vector<T1>> arr) {fa(i,arr) {fa(j,i) cout<<j<<" ";cout<<endl;}}
 template<typename T1, typename T2> void print(vector<pair<T1,T2>> arr) {fa(i,arr) cout<<i.x<<" "<<i.y<<"; ";cout<<endl;}
 template<typename T> void print(map<T,int> mp) {fa(i,mp) cout<<i.x<<" "<<i.y<<"; ";cout<<endl;}
 template<typename T> vector<T> getArr(int n) {vector<T> arr(n);f(i,0,n,1) cin>>arr[i];return arr;}//GET ARRAY AS INPUT OF SIZE N
@@ -38,8 +34,32 @@ template<typename T> set<T> getSet(int n) {set<T> st;f(i,0,n,1) {T e;cin>>e;st.i
 int armin(vi &a) {int mn = INT_MAX;fa(i,a) mn = min(mn,i);return mn;}//GET MIN OF ARRAY
 int armax(vi &a) {int mx = INT_MIN;fa(i,a) mx = max(mx,i);return mx;}//GET MAX OF ARRAY
 
+bool ipbl(vi &x, int n) {
+    int i = len(x)-1;
+    vi a(n,200);
+    while(i>=0) {
+        rf(j,n-1,0,1) {
+            if(a[j]>=1) {
+                a[j] = min(x[i],a[j]-1);
+            } else return false;
+            i--;
+            if(i<0) break;
+        }
+    }
+    return true;
+}
+
 auto solve() {
-    return 0;
+    int n;cin>>n;
+    vi x = getArr<int>(n);
+    sort(all(x));
+    int l = 1, r = 101;
+    while(l<=r) {
+        int m = (l+r)>>1;
+        if(ipbl(x,m)) r = m-1;
+        else l = m+1;
+    }
+    return l;
 }
 
 int32_t main() {ios::sync_with_stdio(0); cin.tie(0); cout.tie(0);int t = 1;

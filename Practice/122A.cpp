@@ -25,11 +25,9 @@ typedef long double ld;
 using pii = pair<int, int>;
 typedef vector<long long> vi;
 
-// PRINT any datatype using these templates
-void print(void) {return;}
-template<typename T> void print(T v) {cout<<v<<endl;}
+// PRINT ARRAY, MAP using this templates
+template<typename T> void print(T v) {return;}
 template<typename T> void print(vector<T> arr) {fa(i,arr) cout<<i<<" ";cout<<endl;}
-template<typename T1> void print(vector<vector<T1>> arr) {fa(i,arr) {fa(j,i) cout<<j<<" ";cout<<endl;}}
 template<typename T1, typename T2> void print(vector<pair<T1,T2>> arr) {fa(i,arr) cout<<i.x<<" "<<i.y<<"; ";cout<<endl;}
 template<typename T> void print(map<T,int> mp) {fa(i,mp) cout<<i.x<<" "<<i.y<<"; ";cout<<endl;}
 template<typename T> vector<T> getArr(int n) {vector<T> arr(n);f(i,0,n,1) cin>>arr[i];return arr;}//GET ARRAY AS INPUT OF SIZE N

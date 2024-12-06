@@ -25,11 +25,9 @@ typedef long double ld;
 using pii = pair<int, int>;
 typedef vector<long long> vi;
 
-// PRINT any datatype using these templates
-void print(void) {return;}
-template<typename T> void print(T v) {cout<<v<<endl;}
+// PRINT ARRAY, MAP using this templates
+template<typename T> void print(T v) {return;}
 template<typename T> void print(vector<T> arr) {fa(i,arr) cout<<i<<" ";cout<<endl;}
-template<typename T1> void print(vector<vector<T1>> arr) {fa(i,arr) {fa(j,i) cout<<j<<" ";cout<<endl;}}
 template<typename T1, typename T2> void print(vector<pair<T1,T2>> arr) {fa(i,arr) cout<<i.x<<" "<<i.y<<"; ";cout<<endl;}
 template<typename T> void print(map<T,int> mp) {fa(i,mp) cout<<i.x<<" "<<i.y<<"; ";cout<<endl;}
 template<typename T> vector<T> getArr(int n) {vector<T> arr(n);f(i,0,n,1) cin>>arr[i];return arr;}//GET ARRAY AS INPUT OF SIZE N
@@ -38,15 +36,46 @@ template<typename T> set<T> getSet(int n) {set<T> st;f(i,0,n,1) {T e;cin>>e;st.i
 int armin(vi &a) {int mn = INT_MAX;fa(i,a) mn = min(mn,i);return mn;}//GET MIN OF ARRAY
 int armax(vi &a) {int mx = INT_MIN;fa(i,a) mx = max(mx,i);return mx;}//GET MAX OF ARRAY
 
+int n;
+vi ans, a;
+
+bool dfs(int l, int r, int prev, int cnt) {
+    if(cnt==n) return true;
+    if(cnt&1) {
+        f(i,0,len(a),1) {
+            if(a[i]+l>r and a[i]!=prev) {
+                ans.pb(a[i]);
+                if(dfs(l+a[i],r,a[i],cnt+1)) return true;
+                ans.pop_back();
+            }
+        }
+    } else {
+        f(i,0,len(a),1) {
+            if(a[i]+r>l and a[i]!=prev) {
+                ans.pb(a[i]);
+                if(dfs(l,r+a[i],a[i],cnt+1)) return true;
+                ans.pop_back();
+            }
+        }
+    }
+    return false;
+}
+
 auto solve() {
-    return 0;
+    string s;cin>>s>>n;
+    f(i,0,len(s),1) if(s[i]=='1') a.pb(i+1);
+    if (!dfs(0,0,-1,0)) cout<<"NO"<<endl;
+    else {
+        cout<<"YES"<<endl;
+        print(ans);
+    }
 }
 
 int32_t main() {ios::sync_with_stdio(0); cin.tie(0); cout.tie(0);int t = 1;
     // cin>>t;cin.clear();
     while(t--) {
-        cout<<solve()<<endl;
-        // solve();
+        // cout<<solve()<<endl;
+        solve();
     }
     // cerr << "time taken : " << (float)clock() / CLOCKS_PER_SEC << " secs" << "\n";
 }

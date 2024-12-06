@@ -25,9 +25,8 @@ typedef long double ld;
 using pii = pair<int, int>;
 typedef vector<long long> vi;
 
-// PRINT any datatype using these templates
-void print(void) {return;}
-template<typename T> void print(T v) {cout<<v<<endl;}
+// PRINT ARRAY, MAP using these templates
+template<typename T> void print(T v) {return;}
 template<typename T> void print(vector<T> arr) {fa(i,arr) cout<<i<<" ";cout<<endl;}
 template<typename T1> void print(vector<vector<T1>> arr) {fa(i,arr) {fa(j,i) cout<<j<<" ";cout<<endl;}}
 template<typename T1, typename T2> void print(vector<pair<T1,T2>> arr) {fa(i,arr) cout<<i.x<<" "<<i.y<<"; ";cout<<endl;}
@@ -39,6 +38,8 @@ int armin(vi &a) {int mn = INT_MAX;fa(i,a) mn = min(mn,i);return mn;}//GET MIN O
 int armax(vi &a) {int mx = INT_MIN;fa(i,a) mx = max(mx,i);return mx;}//GET MAX OF ARRAY
 
 auto solve() {
+    int n,k,d;cin>>n>>k>>d;
+    
     return 0;
 }
 

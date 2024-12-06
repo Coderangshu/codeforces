@@ -34,26 +34,32 @@ template<typename T> set<T> getSet(int n) {set<T> st;f(i,0,n,1) {T e;cin>>e;st.i
 int armin(vi &a) {int mn = INT_MAX;fa(i,a) mn = min(mn,i);return mn;}//GET MIN OF ARRAY
 int armax(vi &a) {int mx = INT_MIN;fa(i,a) mx = max(mx,i);return mx;}//GET MAX OF ARRAY
 
+int lcmm;
+
 auto solve() {
     int n;cin>>n;
-    int l = 0, r = ceil(n/7);
-    while (l<=r) {
-        int m = (l+r)>>1;
-        int num = 0;
-        int t = m;
-        int i = 1;
-        while(t) {
-            if(t&1) num = i*7+num;
-            else num = i*4+num;
-            i *= 10;
-            t >>= 1;
+    int c7 = 0, c4 = 0;
+    while(n>0) {
+        if(n%7==0) {
+            c7 += n/7;
+            n = 0;
+            break;
         }
+        c4++;
+        n -= 4;
     }
-    return 0;
+    if(n!=0) return to_string(-1);
+    else {
+        string s = "";
+        f(i,0,c4,1) s += "4";
+        f(i,0,c7,1) s += "7";
+        return s;
+    }
 }
 
 int32_t main() {ios::sync_with_stdio(0); cin.tie(0); cout.tie(0);int t = 1;
     // cin>>t;cin.clear();
+    lcmm = lcm(4,7);
     while(t--) {
         cout<<solve()<<endl;
         // solve();

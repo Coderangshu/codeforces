@@ -17,19 +17,15 @@ using namespace std;
 #define rfa(v,arr) for(auto v:reverse(all(arr)))
 #define INT_MAX LLONG_MAX
 #define INT_MIN LLONG_MIN
-#define yes cout<<"YES"<<endl;
-#define no cout<<"NO"<<endl;
 
 using ll = long long;
 typedef long double ld;
 using pii = pair<int, int>;
 typedef vector<long long> vi;
 
-// PRINT any datatype using these templates
-void print(void) {return;}
-template<typename T> void print(T v) {cout<<v<<endl;}
+// PRINT ARRAY, MAP using this templates
+template<typename T> void print(T v) {return;}
 template<typename T> void print(vector<T> arr) {fa(i,arr) cout<<i<<" ";cout<<endl;}
-template<typename T1> void print(vector<vector<T1>> arr) {fa(i,arr) {fa(j,i) cout<<j<<" ";cout<<endl;}}
 template<typename T1, typename T2> void print(vector<pair<T1,T2>> arr) {fa(i,arr) cout<<i.x<<" "<<i.y<<"; ";cout<<endl;}
 template<typename T> void print(map<T,int> mp) {fa(i,mp) cout<<i.x<<" "<<i.y<<"; ";cout<<endl;}
 template<typename T> vector<T> getArr(int n) {vector<T> arr(n);f(i,0,n,1) cin>>arr[i];return arr;}//GET ARRAY AS INPUT OF SIZE N
@@ -39,14 +35,35 @@ int armin(vi &a) {int mn = INT_MAX;fa(i,a) mn = min(mn,i);return mn;}//GET MIN O
 int armax(vi &a) {int mx = INT_MIN;fa(i,a) mx = max(mx,i);return mx;}//GET MAX OF ARRAY
 
 auto solve() {
-    return 0;
+    int n;cin>>n;
+    vi a = getArr<int>(n);
+    if(n==1) cout<<-1<<endl;
+    else {
+        sort(all(a));
+        set<int> us, ans;
+        f(i,0,n-1,1) us.insert(a[i+1]-a[i]);
+        int last = *prev(us.end());
+        if(len(us)==1) {
+            ans.insert(a[0]-last);
+            if(n==2 and last%2==0) ans.insert(a[0]+last/2);
+            ans.insert(a[n-1]+last);
+        } else if(len(us)==2) {
+            int cnt = 0, idx = 0, first = *us.begin();
+            f(i,0,n-1,1) if(a[i+1]-a[i]==last) cnt++, idx = i;
+            if(cnt==1 and last%2==0 and first*2==last) ans.insert(a[idx]+last/2);
+        }
+        cout<<len(ans)<<endl;
+        for(auto e:ans) cout<<e<<" ";
+        if(len(ans)>0) cout<<endl;
+    }
+    return ;
 }
 
 int32_t main() {ios::sync_with_stdio(0); cin.tie(0); cout.tie(0);int t = 1;
     // cin>>t;cin.clear();
     while(t--) {
-        cout<<solve()<<endl;
-        // solve();
+        // cout<<solve()<<endl;
+        solve();
     }
     // cerr << "time taken : " << (float)clock() / CLOCKS_PER_SEC << " secs" << "\n";
 }

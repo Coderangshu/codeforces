@@ -37,9 +37,51 @@ template<typename T> map<T,int> getMapOfFreq(int n) {map<T,int> mp;f(i,0,n,1) {T
 template<typename T> set<T> getSet(int n) {set<T> st;f(i,0,n,1) {T e;cin>>e;st.insert(e);}return st;}//GET ORDERED SET AS INPUT
 int armin(vi &a) {int mn = INT_MAX;fa(i,a) mn = min(mn,i);return mn;}//GET MIN OF ARRAY
 int armax(vi &a) {int mx = INT_MIN;fa(i,a) mx = max(mx,i);return mx;}//GET MAX OF ARRAY
+class UnionFind {
+public:
+    vi parent,sz;
+    int n;
+    UnionFind(int n) {
+        this->n = n;
+        parent.assign(n,0);
+        sz.assign(n,1);
+        f(i,0,n,1) parent[i] = i;
+    }
+    void Union(int a, int b) {
+        int pra = findParent(a), prb = findParent(b);
+        if(pra!=prb) {
+            if(sz[pra]>=sz[prb]) {
+                parent[prb] = pra;sz[pra]++;
+            } else {
+                parent[pra] = prb;sz[prb]++;
+            }
+        }
+    }
+    int findParent(int a) {
+        if(parent[a]==a) return a;
+        return parent[a] = findParent(parent[a]);
+    }
+    void finalize() {
+        f(i,0,n,1) findParent(i);
+    }
+};
 
 auto solve() {
-    return 0;
+    int n;cin>>n;
+    UnionFind uf(n);
+    vector<pii> points(n);
+    f(i,0,n,1) cin>>points[i].x>>points[i].y;
+    f(i,0,n,1) {
+        f(j,i+1,n,1) {
+            if(points[i].x==points[j].x or points[i].y==points[j].y) {
+                uf.Union(i,j);
+            }
+        }
+    }
+    uf.finalize();
+    unordered_set<int> uns;
+    fa(parent,uf.parent) uns.insert(parent);
+    return len(uns)-1;
 }
 
 int32_t main() {ios::sync_with_stdio(0); cin.tie(0); cout.tie(0);int t = 1;

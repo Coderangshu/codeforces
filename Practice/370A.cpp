@@ -17,19 +17,15 @@ using namespace std;
 #define rfa(v,arr) for(auto v:reverse(all(arr)))
 #define INT_MAX LLONG_MAX
 #define INT_MIN LLONG_MIN
-#define yes cout<<"YES"<<endl;
-#define no cout<<"NO"<<endl;
 
 using ll = long long;
 typedef long double ld;
 using pii = pair<int, int>;
 typedef vector<long long> vi;
 
-// PRINT any datatype using these templates
-void print(void) {return;}
-template<typename T> void print(T v) {cout<<v<<endl;}
+// PRINT ARRAY, MAP using this templates
+template<typename T> void print(T v) {return;}
 template<typename T> void print(vector<T> arr) {fa(i,arr) cout<<i<<" ";cout<<endl;}
-template<typename T1> void print(vector<vector<T1>> arr) {fa(i,arr) {fa(j,i) cout<<j<<" ";cout<<endl;}}
 template<typename T1, typename T2> void print(vector<pair<T1,T2>> arr) {fa(i,arr) cout<<i.x<<" "<<i.y<<"; ";cout<<endl;}
 template<typename T> void print(map<T,int> mp) {fa(i,mp) cout<<i.x<<" "<<i.y<<"; ";cout<<endl;}
 template<typename T> vector<T> getArr(int n) {vector<T> arr(n);f(i,0,n,1) cin>>arr[i];return arr;}//GET ARRAY AS INPUT OF SIZE N
@@ -39,14 +35,30 @@ int armin(vi &a) {int mn = INT_MAX;fa(i,a) mn = min(mn,i);return mn;}//GET MIN O
 int armax(vi &a) {int mx = INT_MIN;fa(i,a) mx = max(mx,i);return mx;}//GET MAX OF ARRAY
 
 auto solve() {
-    return 0;
+    int r1,c1,r2,c2;cin>>r1>>c1>>r2>>c2;
+    vi cc = {r1,c1,r2,c2};
+    int n = armax(cc);
+    int rd = abs(r1-r2), cd = abs(c1-c2);
+    int king = min(rd,cd);
+    rd -= king, cd -= king;
+    king += rd+cd;
+    int rook = 2, bishop = 0;
+    if(r1==r2 or c1==c2) rook = 1;
+    int e1 = (r1+c1)%2, e2 = (r2+c2)%2;
+    if(e1^e2==1) bishop = 0;
+    else {
+        if(r1+c1==r2+c2 or r1-c1+n==r2-c2+n) bishop = 1;
+        else bishop = 2;
+    }
+    cout<<rook<<" "<<bishop<<" "<<king<<endl;
+    return;
 }
 
 int32_t main() {ios::sync_with_stdio(0); cin.tie(0); cout.tie(0);int t = 1;
     // cin>>t;cin.clear();
     while(t--) {
-        cout<<solve()<<endl;
-        // solve();
+        // cout<<solve()<<endl;
+        solve();
     }
     // cerr << "time taken : " << (float)clock() / CLOCKS_PER_SEC << " secs" << "\n";
 }
