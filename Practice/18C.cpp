@@ -39,7 +39,15 @@ int armin(vi &a) {int mn = INT_MAX;fa(i,a) mn = min(mn,i);return mn;}//GET MIN O
 int armax(vi &a) {int mx = INT_MIN;fa(i,a) mx = max(mx,i);return mx;}//GET MAX OF ARRAY
 
 auto solve() {
-    return 0;
+    int n;cin>>n;
+    vi a = getArr<int>(n);
+    vi prefixSum(n);
+    partial_sum(all(a),prefixSum.begin());
+    int ans = 0;
+    f(i,0,n-1,1) {
+        if(prefixSum[i]==prefixSum[n-1]-prefixSum[i]) ans++;
+    }
+    return ans;
 }
 
 int32_t main() {ios::sync_with_stdio(0); cin.tie(0); cout.tie(0);int t = 1;

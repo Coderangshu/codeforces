@@ -2,8 +2,6 @@
 using namespace std;
 
 #define int ll
-#define ft first
-#define sd second
 #define pb push_back
 #define bs binary_search
 #define ub upper_bound
@@ -38,8 +36,30 @@ template<typename T> set<T> getSet(int n) {set<T> st;f(i,0,n,1) {T e;cin>>e;st.i
 int armin(vi &a) {int mn = INT_MAX;fa(i,a) mn = min(mn,i);return mn;}//GET MIN OF ARRAY
 int armax(vi &a) {int mx = INT_MIN;fa(i,a) mx = max(mx,i);return mx;}//GET MAX OF ARRAY
 
+int n,m,x,y;
+vi a;
+vector<vector<vi>> memo;
+
+int recursion(int i, int noc, bool chr) {
+    if(i==m) {
+        if(noc>=x and noc<=y) return 0;
+        return 1e10;
+    }
+    if(memo[i][noc][chr]!=-1) return memo[i][noc][chr];
+    int ans = 1e10;
+    if(noc<y) ans = min(ans,(chr?n-a[i]:a[i]) + recursion(i+1,noc+1,chr));
+    if(x<=noc) ans = min(ans,(chr?a[i]:n-a[i]) + recursion(i+1,1,!chr));
+    return memo[i][noc][chr] = ans;
+}
+
 auto solve() {
-    return 0;
+    cin>>n>>m>>x>>y;
+    memo.assign(m+1,vector<vi>(y+1,vi(2,-1)));
+    vector<string> ra(n);
+    f(i,0,n,1) cin>>ra[i];
+    a.assign(m,0);
+    f(i,0,m,1) f(j,0,n,1) if(ra[j][i]=='#') a[i]++;
+    return min(recursion(0,0,true), recursion(0,0,false));
 }
 
 int32_t main() {ios::sync_with_stdio(0); cin.tie(0); cout.tie(0);int t = 1;

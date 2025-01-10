@@ -39,6 +39,9 @@ int armin(vi &a) {int mn = INT_MAX;fa(i,a) mn = min(mn,i);return mn;}//GET MIN O
 int armax(vi &a) {int mx = INT_MIN;fa(i,a) mx = max(mx,i);return mx;}//GET MAX OF ARRAY
 
 auto solve() {
+    int n;cin>>n;
+    vi a = getArr<int>(n);
+    sort(all(a));
     return 0;
 }
 

@@ -2,8 +2,8 @@
 using namespace std;
 
 #define int ll
-#define ft first
-#define sd second
+#define x first
+#define y second
 #define pb push_back
 #define bs binary_search
 #define ub upper_bound
@@ -38,15 +38,85 @@ template<typename T> set<T> getSet(int n) {set<T> st;f(i,0,n,1) {T e;cin>>e;st.i
 int armin(vi &a) {int mn = INT_MAX;fa(i,a) mn = min(mn,i);return mn;}//GET MIN OF ARRAY
 int armax(vi &a) {int mx = INT_MIN;fa(i,a) mx = max(mx,i);return mx;}//GET MAX OF ARRAY
 
+void dfs (vi *adj, int u, unordered_set<int> &vis, stack<int> &stk) {
+    fa(v,adj[u]) {
+        if(vis.count(v)==0) {
+            vis.insert(v);
+            dfs(adj,v,vis,stk);
+        }
+    }
+    stk.push(u);
+    return;
+}
+
+void dfs2 (vi *adj, int u, unordered_set<int> &vis, vi &nodes) {
+    fa(v,adj[u]) {
+        if(vis.count(v)==0) {
+            vis.insert(v);
+            nodes.pb(v);
+            dfs2(adj, v, vis, nodes);
+        }
+    }
+    return;
+}
+
+vector<vi> kosaraju(vi *adj, int n) {
+    stack<int> stk;
+    unordered_set<int> vis;
+    f(i,0,n,1) if(vis.count(i)==0) {
+        vis.insert(i);
+        dfs(adj,i,vis,stk);
+    }
+
+    vi adjT[n];
+    f(u,0,n,1) fa(v,adj[u]) adjT[v].pb(u);
+
+    vis.clear();
+    vector<vi> components;
+    while(!stk.empty()) {
+        int u = stk.top(); stk.pop();
+        if(vis.count(u)==0) {
+            vi nodes = {u};
+            vis.insert(u);
+            dfs2(adjT,u,vis,nodes);
+            components.pb(nodes);
+        }
+    }
+    return components;
+}
+
 auto solve() {
-    return 0;
+    int n;cin>>n;
+    vi prices = getArr<int>(n);
+    int m;cin>>m;
+    vi adj[n];
+    f(i,0,m,1) {
+        int u,v;cin>>u>>v;u--,v--;
+        adj[u].pb(v);
+    }
+    vector<vi> components = kosaraju(adj,n);
+    int ans = 0, ways = 1, mod = 1e9+7;
+
+    fa(scc,components) {
+        int mn = INT_MAX, count = 0;
+        fa(node,scc) {
+            if(prices[node]<mn) {
+                mn = prices[node];
+                count = 1;
+            } else if(prices[node]==mn) count++;
+        }
+        ans += mn;
+        ways = (ways*count)%mod;
+    }
+    cout<<ans<<" "<<ways<<endl;
+    return;
 }
 
 int32_t main() {ios::sync_with_stdio(0); cin.tie(0); cout.tie(0);int t = 1;
     // cin>>t;cin.clear();
     while(t--) {
-        cout<<solve()<<endl;
-        // solve();
+        // cout<<solve()<<endl;
+        solve();
     }
     // cerr << "time taken : " << (float)clock() / CLOCKS_PER_SEC << " secs" << "\n";
 }

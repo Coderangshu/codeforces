@@ -38,8 +38,34 @@ template<typename T> set<T> getSet(int n) {set<T> st;f(i,0,n,1) {T e;cin>>e;st.i
 int armin(vi &a) {int mn = INT_MAX;fa(i,a) mn = min(mn,i);return mn;}//GET MIN OF ARRAY
 int armax(vi &a) {int mx = INT_MIN;fa(i,a) mx = max(mx,i);return mx;}//GET MAX OF ARRAY
 
+vi nn(3),pp(3),cc(3);
+
+bool ipbl(int n, int r) {
+    int tr = r;
+    f(i,0,3,1) {
+        if((n*cc[i])<=nn[i] or cc[i]==0) continue;
+        tr -= ((n*cc[i])-nn[i])*pp[i];
+        if(tr<0) return false;
+    }
+    return tr<=r;
+}
+
 auto solve() {
-    return 0;
+    cc.assign(3,0);
+    string s;int r;cin>>s>>nn[0]>>nn[1]>>nn[2]>>pp[0]>>pp[1]>>pp[2]>>r;
+    fa(c,s) if(c=='B') cc[0]++;
+    else if(c=='S') cc[1]++;
+    else cc[2]++;
+    int nnb = cc[0]>0?nn[0]/cc[0]:INT_MAX, nns = cc[1]>0?nn[1]/cc[1]:INT_MAX, nnc = cc[2]>0?nn[2]/cc[2]:INT_MAX;
+    int ans = min(nnb,min(nns,nnc));
+    nn[0] -= cc[0]*ans, nn[1] -= cc[1]*ans, nn[2] -= cc[2]*ans;
+    int l = 0, e = 1e16;
+    while(l<=e) {
+        int m = (l+e)>>1;
+        if(ipbl(m,r)) l = m+1;
+        else e = m-1;
+    }
+    return ans+e;
 }
 
 int32_t main() {ios::sync_with_stdio(0); cin.tie(0); cout.tie(0);int t = 1;

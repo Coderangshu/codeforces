@@ -2,8 +2,8 @@
 using namespace std;
 
 #define int ll
-#define ft first
-#define sd second
+#define x first
+#define y second
 #define pb push_back
 #define bs binary_search
 #define ub upper_bound
@@ -39,14 +39,22 @@ int armin(vi &a) {int mn = INT_MAX;fa(i,a) mn = min(mn,i);return mn;}//GET MIN O
 int armax(vi &a) {int mx = INT_MIN;fa(i,a) mx = max(mx,i);return mx;}//GET MAX OF ARRAY
 
 auto solve() {
-    return 0;
+    int n,k;cin>>n>>k;
+    vi ans;
+    if (n==1) return ans.pb((k?-1:1)), ans;
+    if (k<n/2) return ans.pb(-1), ans;
+    ans.pb(k-n/2+1);
+    ans.pb(2*(k-n/2+1));
+    f(i,2,n,1) ans.pb(8e8+i);
+    return ans;
 }
 
 int32_t main() {ios::sync_with_stdio(0); cin.tie(0); cout.tie(0);int t = 1;
     // cin>>t;cin.clear();
     while(t--) {
-        cout<<solve()<<endl;
-        // solve();
+        // cout<<solve()<<endl;
+        auto ans = solve();
+        print(ans);
     }
     // cerr << "time taken : " << (float)clock() / CLOCKS_PER_SEC << " secs" << "\n";
 }

@@ -2,8 +2,8 @@
 using namespace std;
 
 #define int ll
-#define ft first
-#define sd second
+#define x first
+#define y second
 #define pb push_back
 #define bs binary_search
 #define ub upper_bound
@@ -39,14 +39,25 @@ int armin(vi &a) {int mn = INT_MAX;fa(i,a) mn = min(mn,i);return mn;}//GET MIN O
 int armax(vi &a) {int mx = INT_MIN;fa(i,a) mx = max(mx,i);return mx;}//GET MAX OF ARRAY
 
 auto solve() {
-    return 0;
+    int n,m;cin>>n>>m;
+    vi a = getArr<int>(n);
+    vi incrr2l(n), decrl2r(n);
+    iota(all(incrr2l),0), iota(all(decrl2r),0);
+    f(i,1,n,1) if(a[i]<=a[i-1]) decrl2r[i] = decrl2r[i-1];
+    rf(i,n-2,0,1) if(a[i+1]>=a[i]) incrr2l[i] = incrr2l[i+1];
+    // print(decrl2r);
+    // print(incrr2l);
+    while(m--) {
+        int l,r;cin>>l>>r;
+        l--,r--;
+        cout<<(decrl2r[r]<=incrr2l[l]?"Yes":"No")<<endl;
+    }
 }
 
 int32_t main() {ios::sync_with_stdio(0); cin.tie(0); cout.tie(0);int t = 1;
     // cin>>t;cin.clear();
     while(t--) {
-        cout<<solve()<<endl;
-        // solve();
+        solve();
     }
     // cerr << "time taken : " << (float)clock() / CLOCKS_PER_SEC << " secs" << "\n";
 }

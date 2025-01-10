@@ -2,8 +2,8 @@
 using namespace std;
 
 #define int ll
-#define ft first
-#define sd second
+#define x first
+#define y second
 #define pb push_back
 #define bs binary_search
 #define ub upper_bound
@@ -39,14 +39,48 @@ int armin(vi &a) {int mn = INT_MAX;fa(i,a) mn = min(mn,i);return mn;}//GET MIN O
 int armax(vi &a) {int mx = INT_MIN;fa(i,a) mx = max(mx,i);return mx;}//GET MAX OF ARRAY
 
 auto solve() {
-    return 0;
+    int n;cin>>n;
+    vector<pii> a;
+    vi f, s;
+    f(i,0,n,1) {
+        int e;cin>>e;
+        a.pb({e,i+1});
+    }
+    make_heap(all(a));
+    bool rev = false;
+    while(len(a)!=0) {
+        pop_heap(all(a));
+        auto [largest,li] = a.back();
+        int secondLargest = -1, sli = -1;
+        a.pop_back();
+        if(len(a)>0) {
+            pop_heap(all(a));
+            auto pr = a.back();
+            secondLargest = pr.x;
+            sli = pr.y;
+            a.pop_back();
+        }
+        if (rev) {
+            s.pb(li);
+            if(secondLargest!=-1) f.pb(sli);
+        } else {
+            f.pb(li);
+            if(secondLargest!=-1) s.pb(sli);
+        }
+        rev = !rev;
+    }
+    cout<<len(s)<<endl;
+    print(s);
+    cout<<len(f)<<endl;
+    print(f);
+    return;
 }
 
 int32_t main() {ios::sync_with_stdio(0); cin.tie(0); cout.tie(0);int t = 1;
     // cin>>t;cin.clear();
     while(t--) {
-        cout<<solve()<<endl;
-        // solve();
+        // cout<<solve()<<endl;
+        solve();
     }
     // cerr << "time taken : " << (float)clock() / CLOCKS_PER_SEC << " secs" << "\n";
 }
