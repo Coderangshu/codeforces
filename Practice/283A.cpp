@@ -40,11 +40,15 @@ int armax(vi &a) {int mx = INT_MIN;fa(i,a) mx = max(mx,i);return mx;}//GET MAX O
 
 auto solve() {
     int n;cin>>n;
-    vi a = getArr<int>(n);
-    int sum = 0;
-    fa(i,a) sum += i;
-    int sa = ceil((sum*1.0)/(n-1));
-    return max(sa, armax(a));
+    vi nums(n+1,0), diff(n+1,0);
+    while(n--) {
+        int choice;cin>>choice;
+        if(choice==1) {
+        } else if(choice==2) {
+        } else {
+        }
+    }
+    return 0;
 }
 
 int32_t main() {ios::sync_with_stdio(0); cin.tie(0); cout.tie(0);int t = 1;
