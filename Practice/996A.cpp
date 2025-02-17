@@ -39,7 +39,18 @@ int armin(vi &a) {int mn = INT_MAX;fa(i,a) mn = min(mn,i);return mn;}//GET MIN O
 int armax(vi &a) {int mx = INT_MIN;fa(i,a) mx = max(mx,i);return mx;}//GET MAX OF ARRAY
 
 auto solve() {
-    return 0;
+    int n;cin>>n;
+    int ans = 0;
+    ans += n/100;
+    n = n%100;
+    ans += n/20;
+    n = n%20;
+    ans += n/10;
+    n = n%10;
+    ans += n/5;
+    n = n%5;
+    ans += n;
+    return ans;
 }
 
 int32_t main() {ios::sync_with_stdio(0); cin.tie(0); cout.tie(0);int t = 1;

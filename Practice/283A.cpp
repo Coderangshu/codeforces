@@ -41,21 +41,33 @@ int armax(vi &a) {int mx = INT_MIN;fa(i,a) mx = max(mx,i);return mx;}//GET MAX O
 auto solve() {
     int n;cin>>n;
     vi nums(n+1,0), diff(n+1,0);
+    int i = 0, sum = 0;
     while(n--) {
         int choice;cin>>choice;
         if(choice==1) {
+            int ai,xi;cin>>ai>>xi;
+            diff[ai-1] += xi;
+            sum += ai*xi;
         } else if(choice==2) {
+            int ki;cin>>ki;
+            nums[++i] = ki;
+            sum += ki;
         } else {
+            sum -= nums[i]+diff[i];
+            diff[i-1] += diff[i];
+            diff[i] = 0;
+            i--;
         }
+        cout<<fixed<<setprecision(6)<<(ld)sum/(double)(i+1)<<endl;
     }
-    return 0;
+    return;
 }
 
 int32_t main() {ios::sync_with_stdio(0); cin.tie(0); cout.tie(0);int t = 1;
     // cin>>t;cin.clear();
     while(t--) {
-        cout<<solve()<<endl;
-        // solve();
+        // cout<<solve()<<endl;
+        solve();
     }
     // cerr << "time taken : " << (float)clock() / CLOCKS_PER_SEC << " secs" << "\n";
 }

@@ -38,15 +38,40 @@ template<typename T> set<T> getSet(int n) {set<T> st;f(i,0,n,1) {T e;cin>>e;st.i
 int armin(vi &a) {int mn = INT_MAX;fa(i,a) mn = min(mn,i);return mn;}//GET MIN OF ARRAY
 int armax(vi &a) {int mx = INT_MIN;fa(i,a) mx = max(mx,i);return mx;}//GET MAX OF ARRAY
 
+int bs(vi &a, vi &partial, int k, int i) {
+    int l = 0, r = i, mid, sum, extra;
+    while(l<=r) {
+        mid = (l+r)>>1;
+        sum = 0;
+        if(i>0) sum = partial[i-1];
+        if(i-1-mid>=0) sum -= partial[i-1-mid];
+        extra = a[i]*mid - sum;
+        if (extra<=k) l = mid+1;
+        else r = mid-1;
+    }
+    return l;
+}
+
 auto solve() {
-    return 0;
+    int n, k, tcount, count = 0, num;cin>>n>>k;
+    vi a = getArr<int>(n), partial(n);
+    sort(all(a));
+    partial_sum(all(a),partial.begin());
+    f(i,0,n,1) {
+        tcount = bs(a,partial,k,i);
+        if(tcount>count) {
+            count = tcount;
+            num = a[i];
+        }
+    }
+    cout<<count<<" "<<num<<endl;
 }
 
 int32_t main() {ios::sync_with_stdio(0); cin.tie(0); cout.tie(0);int t = 1;
     // cin>>t;cin.clear();
     while(t--) {
-        cout<<solve()<<endl;
-        // solve();
+        // cout<<solve()<<endl;
+        solve();
     }
     // cerr << "time taken : " << (float)clock() / CLOCKS_PER_SEC << " secs" << "\n";
 }
